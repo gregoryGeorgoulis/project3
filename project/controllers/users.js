@@ -9,7 +9,7 @@ var Movie = require('../models/movies.js');
 ///Index
 
 ///Create User
-router.post('/' function(req,res){
+router.post('/', function(req,res){
 	User.create(req.body, function(err,user){
 		if(err){
 			console.log(err);
@@ -23,7 +23,7 @@ router.post('/' function(req,res){
 ////Requires User Authentication
 router.use(passport.authenticate('jwt', { session: false }));
 ///Show User
-router.get('/:id' function(req,res){
+router.get('/:id', function(req,res){
 	User.findById(req.params.id, function(err,user){
 		if (err) {
 			console.log(err);
@@ -35,7 +35,7 @@ router.get('/:id' function(req,res){
 });
 
 ///Update User
-router.put('/:id/edit' function(req,res){
+router.put('/:id/edit', function(req,res){
 	User.findByIdAndUpdate(req.params.id, { username: req.body.username, password: req.body.password }, function(err,user){
 		if (err) {
 			console.log(err);
@@ -51,4 +51,4 @@ router.delete('/:id', function(req,res){
 
 ///Delete Movie
 
-module.exports = router.
+module.exports = router;
