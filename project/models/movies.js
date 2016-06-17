@@ -7,9 +7,9 @@ var mongoose = require('mongoose');
 // MODEL SCHEMA
 // ===============================
 var MoviesSchema = mongoose.Schema({
-	id: String, 
+	imdbID: String, 
 	title: String, 
-	img: String, 
+	poster: String, 
 	description: String, 
 	watched: Boolean, 
 	rating: String
