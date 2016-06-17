@@ -37,8 +37,8 @@ app.use('/users', usersController);
 // var authController = require('./controllers/auth.js')
 // app.use('/auth', authController);
 
-// var seedController = require('./controllers/seed.js');
-// app.use('/seed', seedController);
+var seedController = require('./controllers/seed.js');
+app.use('/seed', seedController);
 
 // LISTEN
 app.listen(port);
