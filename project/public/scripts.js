@@ -25,20 +25,20 @@ var KingComponent = React.createClass({
 		});
 		this.showAjax();
 	},
-	getFwakingData: function(title) {
-		this.setState({movies:title});
+	getFwakingData: function(title) {//This method gets our data and sets the state of 
+		this.setState({movies:title});//The state of getFwakingData is now set to movies: title(which is the data we got back)
 	},
-	showAjax: function() {
-		$.ajax({
+	showAjax: function() {//This ajax call queries the database on the frontend via the get request in the users.js controller
+		$.ajax({//get users by ID
 			url:"/users/" + this.state.id,
 			method:"GET",
-			success: function(data) {
+			success: function(data) {//upon success we set the var title to data we received
 				console.log('(. )( .)');
 				console.log(data.movies[0].title);
 				var title = data.movies[0].title;
 				console.log('V', title);
 				 // this.setState({movies: title});
-				 this.getFwakingData(title);
+				 this.getFwakingData(title);//we then invoke getFwakingData(which sets the state of movies) with our new data.
 			}.bind(this),
 			error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -68,7 +68,7 @@ var KingComponent = React.createClass({
 });
 
 var FwakingLogin = React.createClass({
-	getInitialState: function(){
+	getInitialState: function(){//Initial state is set to the props of auth user via the attribute "loginCheck"
 		return{
 			username: this.props.loginCheck,
 			password: this.props.loginCheck,
@@ -79,9 +79,9 @@ var FwakingLogin = React.createClass({
 		var change = {};
 		console.log("===> This is stateName: ", stateName);
 		change[stateName] = e.target.value;
-		this.setState(change);
+		this.setState(change);//sets state to the input of login form
 	},
-	handleSubmit: function(e){
+	handleSubmit: function(e){//The submit will be handled by passing the username and password through the loginAJAX call
 		e.preventDefault();
 		var username = this.state.username.trim();
 		var password = this.state.password.trim();
