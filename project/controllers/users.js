@@ -59,9 +59,7 @@ router.delete('/:id', function(req,res){
 });
 
 ///Delete Movie
-<<<<<<< HEAD
 
-=======
 router.delete('/:id/delete/:movie_id', function(req,res){
 	User.findBy(req.params.id).then(function(user){
 		user.movies.forEach(function(movie){
@@ -72,9 +70,5 @@ router.delete('/:id/delete/:movie_id', function(req,res){
 	});
 	Movie.findByIdAndRemove(req.params.movie_id);
 });
-<<<<<<< HEAD
->>>>>>> user-controller
-=======
->>>>>>> fb5a34d2c0179e2980e8ce678f8eaf8f2474f7f9
->>>>>>> index-html
+
 module.exports = router;

@@ -34,8 +34,8 @@ mongoose.connect(db);
 var usersController = require('./controllers/users.js');
 app.use('/users', usersController);
 
-// var authController = require('./controllers/auth.js')
-// app.use('/auth', authController);
+var authController = require('./controllers/auth.js')
+app.use('/auth', authController);
 
 var seedController = require('./controllers/seed.js');
 app.use('/seed', seedController);
