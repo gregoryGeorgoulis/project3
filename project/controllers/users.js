@@ -9,7 +9,7 @@ var Movie = require('../models/movies.js');
 ///Index
 
 ///Create User
-router.post('/' function(req,res){
+router.post('/', function(req,res){
 	User.create(req.body, function(err,user){
 		if(err){
 			console.log(err);
@@ -23,7 +23,7 @@ router.post('/' function(req,res){
 ////Requires User Authentication
 router.use(passport.authenticate('jwt', { session: false }));
 ///Show User
-router.get('/:id' function(req,res){
+router.get('/:id', function(req,res){
 	User.findById(req.params.id, function(err,user){
 		if (err) {
 			console.log(err);
@@ -35,7 +35,7 @@ router.get('/:id' function(req,res){
 });
 
 ///Update User
-router.put('/:id/edit' function(req,res){
+router.put('/:id/edit', function(req,res){
 	User.findByIdAndUpdate(req.params.id, { username: req.body.username, password: req.body.password }, function(err,user){
 		if (err) {
 			console.log(err);
@@ -44,11 +44,29 @@ router.put('/:id/edit' function(req,res){
 });
 ///Delete User
 router.delete('/:id', function(req,res){
-	User.findByIdAndRemove(req.params.id);
+	User.findByIdAndRemove(req.params.id, function(err,user) {
+		if (err) {
+			console.log(err);
+		}
+		for (i = 0; i < user.movies.length; i++){
+			Movie.findByIdAndRemove(user.movies[i].id, function(err,movie){
+				if (err) {
+					console.log(err);
+				}
+			}); 
+		}
+	});
 });
-///Edit Movie
-
 
 ///Delete Movie
-
-module.exports = router.
+router.delete('/:id/delete/:movie_id', function(req,res){
+	User.findBy(req.params.id).then(function(user){
+		user.movies.forEach(function(movie){
+			var index = user.movies.indexOf(movie);
+			user.movies.splice(index,1);
+			user.save();
+		});
+	});
+	Movie.findByIdAndRemove(req.params.movie_id);
+});
+module.exports = router;
