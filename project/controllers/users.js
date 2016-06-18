@@ -72,5 +72,9 @@ router.delete('/:id/delete/:movie_id', function(req,res){
 	});
 	Movie.findByIdAndRemove(req.params.movie_id);
 });
+<<<<<<< HEAD
 >>>>>>> user-controller
+=======
+>>>>>>> fb5a34d2c0179e2980e8ce678f8eaf8f2474f7f9
+>>>>>>> index-html
 module.exports = router;
