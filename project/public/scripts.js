@@ -214,7 +214,7 @@ var FwakingSignUp = React.createClass({
 });
 
 
-var ShowUser =React.createClass({
+var ShowUser = React.createClass({
 	render: function() {
 		console.log("props ==>", this.props.posters);
 		var movie = this.props.movies;
@@ -226,16 +226,28 @@ var ShowUser =React.createClass({
 		
 		return(
 			<div>
+			<FwaukingSearchBar />
 				<h1>Welcome {this.props.name}</h1>
 				<h1>these are your fucking movies bitch:</h1>
 				<img src={this.props.posters[0]} />
-				<br />
 				<img src={this.props.posters[1]} />
+				</div>
 				
 
-			</div>
-
 		);
+	}
+})
+
+var FwaukingSearchBar = React.createClass({
+	render: function() {
+		return(
+			<div className="searchForm" >
+			<form>
+				<input type="text" placeholder="seach some fwauking thing" />
+				<button>fwauking button</button>
+			</form>
+			</div>
+		)
 	}
 })
 
