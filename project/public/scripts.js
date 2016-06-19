@@ -70,6 +70,7 @@ var KingComponent = React.createClass({
 				<div>
 					<h1>My fwak is dirty!</h1>
 					<FwakingLogin loginCheck={this.state.authUser} onChange={this.changeLogin} />
+					<FwakingSignUp />
 				</div>
 			);
 		}
@@ -133,6 +134,70 @@ var FwakingLogin = React.createClass({
 		);
 	}
 })
+
+// ==================================
+// Signup Code - child of Kingcomponent
+// ==================================
+var FwakingSignUp = React.createClass({
+	// getInitialState: function(){
+	// 	return{
+	// 		username: this.props.loginCheck,
+	// 		password: this.props.loginCheck,
+	// 		loginStatus: this.props.loginCheck,
+	// 	}
+	// },
+	handleSignUpFormChange: function(stateName, e){
+		var change = {};
+		console.log("===> This is stateName: ", stateName);
+		change[stateName] = e.target.value;
+		this.setState(change);//sets state to the input of signup form
+	},
+	handleSubmit: function(e){//The submit will be handled by passing the username and password through the signUpAJAX call
+		e.preventDefault();
+		var username = this.state.username.trim();
+		var password = this.state.password.trim();
+		this.signUpAJAX(username, password);
+	},
+	signUpAJAX: function(username, password){
+		$.ajax({
+			url: "/users",
+			method: "POST", 
+			data: {
+				username: username, 
+				password: password,
+			},
+			success: function(data){
+				console.log("===>This is signUpAJAX success data: ", data);
+			}.bind(this)
+		});
+	},
+	render: function(){
+		return(
+			<div className="signup-form" >
+				<h3>SignUp Fam!</h3>
+				<form onSubmit={this.handleSubmit}>
+					<label htmlFor="username">Username</label>
+					<input 
+						className="username-signup-form" 
+						type="text" 
+						placeholder="username"
+						onChange={this.handleSignUpFormChange.bind(this, 'username')}
+					/>
+					<br/>
+					<label htmlFor="password">Password</label>
+					<input 
+						className="password-signup-form"
+						type="text" 
+						placeholder="password"
+						onChange={this.handleSignUpFormChange.bind(this, 'password')}
+					/>
+					<br/>
+					<input className="signup-form-submit" type="submit"/>
+				</form>
+			</div>
+		);
+	}
+});
 
 
 var ShowUser =React.createClass({
