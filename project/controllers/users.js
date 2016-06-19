@@ -59,20 +59,26 @@ router.delete('/:id', function(req,res){
 });
 
 ///Create Movie
-router.post('/:id/newmovie/', function(req,res){
+router.put('/:id/newmovie/', function(req,res){
 	console.log(req.body);
 	Movie.create(req.body, function(err,movie){
+		console.log('adding movie');
 		if (err) {
 			console.log(err);
 		}
-		res.send(true);
-	});
-	User.findByIdAndUpdate(req.params.id, function(err,user){
-		if (err) {
-			console.log(err);
-		}
-		console.log(user.movies);
-		user.movies.push(req.body.title);
+		User.findById(req.params.id, function(err,user){
+			console.log('editing user');
+			if (err) {
+				console.log(err);
+			}
+			console.log(user.movies);
+			console.log(req.body.title);
+			user.movies.push(req.body);
+			user.save();
+			console.log('updated movies below');
+			console.log(user.movies);
+			res.send(true);
+		});
 	});
 });
 
