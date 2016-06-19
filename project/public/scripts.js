@@ -229,7 +229,7 @@ var ShowUser =React.createClass({
 				<h1>Welcome {this.props.name}</h1>
 				<h1>these are your fucking movies bitch:</h1>
 				<img src={this.props.posters[0]} />
-				<br>
+				<br />
 				<img src={this.props.posters[1]} />
 				
 
