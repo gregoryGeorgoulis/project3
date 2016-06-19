@@ -143,7 +143,7 @@ var ShowUser =React.createClass({
 		
 		return(
 			<div>
-				{movies}
+				<h1>Welcome {this.props.name}</h1>
 			</div>
 
 		);
