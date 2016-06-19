@@ -218,26 +218,30 @@ var ShowUser =React.createClass({
 	render: function() {
 		console.log("props ==>", this.props.posters);
 		var movie = this.props.movies;
+		var poster = this.props.posters;
+		console.log("====>This is poster: ", posters);
+		var posters = poster.map(function(poster){
+			return <img src={poster}/>
+		});
+		// var posters = function(){
+		// 	for(var i = 0; i < poster.length; i++){
+				
+		// 	}
+		// }
 		// console.log(typeof this.props.movies);
 		// console.log("proppsss", this.props.movies);
 		// var movies = this.props.movies;
 		// console.log(movies[1].title);
 		// var movies = this.props.movies.map(function(movie){})
-		
 		return(
 			<div>
 				<h1>Welcome {this.props.name}</h1>
-				<h1>these are your fucking movies bitch:</h1>
-				<img src={this.props.posters[0]} />
-				<br />
-				<img src={this.props.posters[1]} />
-				
-
-			</div>
-
-		);
+        <h1>these are your fucking movies bitch:</h1>
+       {posters}
+	    </div>
+    );
 	}
-})
+});
 
 // ==========================
 //  REACT DOM
