@@ -26,6 +26,7 @@ var KingComponent = React.createClass({
 		this.showAjax();
 	},
 	getFwakingData: function(movies) {//This method gets our data and sets the state of 
+		console.log(movies);
 		this.setState({movies:movies});//The state of getFwakingData is now set to movies: title(which is the data we got back)
 	},
 	showAjax: function() {//This ajax call queries the database on the frontend via the get request in the users.js controller
@@ -33,14 +34,14 @@ var KingComponent = React.createClass({
 			url:"/users/" + this.state.id,
 			method:"GET",
 			success: function(data) {//upon success we set the var title to data we received
-				console.log("==========================");
-				console.log(data.movies);
-				console.log('=======================');
+				// console.log("==========================");
+				// console.log(data.movies);
+				// console.log('=======================');
 				var daMovies = data.movies;
 				var title = data.movies[0].title;
 				var description = data.movies[0].description;
 				var poster = data.movies[0].poster;
-				console.log('V', title);
+				// console.log('V', title);
 				// var both = data.movies.forEach(function(movie) {
 				// 	console.log('=======================');
 				// 	console.log(movie.title);
@@ -50,19 +51,20 @@ var KingComponent = React.createClass({
 				 this.getFwakingData(daMovies);//we then invoke getFwakingData(which sets the state of movies) with our new data.
 			}.bind(this),
 			error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
+        // console.error(this.props.url, status, err.toString());
       }.bind(this)
 		})
 	},
 	render: function(){
-		console.log("====> authUser state: ", this.state.authUser);
-		console.log("====> state of username: ", this.state.username);
-		console.log("====> state of id: ", this.state.id);
-		console.log("====> state of movies: ", this.state.movies);
+		// console.log("====> authUser state: ", this.state.authUser);
+		// console.log("====> state of username: ", this.state.username);
+		// console.log("====> state of id: ", this.state.id);
+		// console.log("====> state of movies: ", this.state.movies);
+		// console.log("===> checking shit out bros", this.state.movies[0]);
 		if(this.state.authUser === true){
 			return(
 				<div>
-					<ShowUser movies={this.state.movies} name={this.state.username} />
+					<ShowUser movies={this.state.movies[1]} name={this.state.username} />
 				</div>
 			);
 		} else {
@@ -86,7 +88,7 @@ var FwakingLogin = React.createClass({
 	},
 	handleLoginFormChange: function(stateName, e){
 		var change = {};
-		console.log("===> This is stateName: ", stateName);
+		// console.log("===> This is stateName: ", stateName);
 		change[stateName] = e.target.value;
 		this.setState(change);//sets state to the input of login form
 	},
@@ -106,7 +108,7 @@ var FwakingLogin = React.createClass({
 			},
 
 			success: function(data){
-				console.log("===>This is loginAJAX success data: ", data);
+				// console.log("===>This is loginAJAX success data: ", data);
 				Cookies.set("jwt_token", data.token);
 				Cookies.set("username", data.username);
 				Cookies.set("id", data.id);
@@ -137,13 +139,14 @@ var FwakingLogin = React.createClass({
 
 var ShowUser =React.createClass({
 	render: function() {
-		console.log("props ==>", this.props);
-		console.log(this.props.movies);
+		// console.log("props ==>", this.props);
+		// console.log(this.props.movies);
 		// var movies = this.props.movies.map(function(movie){})
 		
 		return(
 			<div>
 				<h1>Welcome {this.props.name}</h1>
+				
 			</div>
 
 		);
