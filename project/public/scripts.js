@@ -201,6 +201,22 @@ var FwakingSignUp = React.createClass({
 	}
 });
 
+var SearchBar = React.createClass({
+	onClick: function(search) {
+		$.ajax({
+			url: 'http://www.omdbapi.com/?s='+search,
+			type: 'GET',
+			success: function(data){
+
+			}
+		})
+	},
+	render: function() {
+		return(
+			<input type="search" for="search" placeholder="Search Movies"></input>
+		);
+	}
+});
 
 var ShowUser =React.createClass({
 	render: function() {
