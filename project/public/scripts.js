@@ -25,33 +25,44 @@ var KingComponent = React.createClass({
 		});
 		this.showAjax();
 	},
-	getFwakingData: function(movies) {//This method gets our data and sets the state of 
-		console.log(movies);
-		this.setState({movies:movies});//The state of getFwakingData is now set to movies: title(which is the data we got back)
-	},
+	// getFwakingData: function(movies) {//This method gets our data and sets the state of 
+	// 	// console.log('hey you fuck');
+	// 	// console.log("fuck you and ur fat cunt" ,movies.movies[1].title);
+	// 	this.setState({movies:movies.movies);//The state of getFwakingData is now set to movies: title(which is the data we got back)
+	// },
 	showAjax: function() {//This ajax call queries the database on the frontend via the get request in the users.js controller
 		$.ajax({//get users by ID
 			url:"/users/" + this.state.id,
 			method:"GET",
 			success: function(data) {//upon success we set the var title to data we received
 				// console.log("==========================");
-				// console.log(data.movies);
+				// console.log(data.movies[1].title);
 				// console.log('=======================');
-				var daMovies = data.movies;
-				var title = data.movies[0].title;
-				var description = data.movies[0].description;
-				var poster = data.movies[0].poster;
+				// console.log("touch me please " , data.movies);
+				// console.log(typeof data.movies[1]);
+				
+				// this.setState({movies: data.movies[0]});
+				console.log("movie data yo", data.movies[0]);
+				var moviesArray = this.state.movies;
+				data.movies.forEach(function(movie) {
+					moviesArray.push(
+					 movie.poster
+					);
+				})
+				this.setState({movies: moviesArray});
+
+				// console.log(typeof daMovies);
+				// var title = data.movies[0].title;
+				// var description = data.movies[0].description;
+				// var poster = data.movies[0].poster;
 				// console.log('V', title);
-				// var both = data.movies.forEach(function(movie) {
-				// 	console.log('=======================');
-				// 	console.log(movie.title);
-				// 	console.log(movie.description);
-				// 	console.log(movie.rating);							
+				// })
+			
 				 // this.setState({movies: title});
-				 this.getFwakingData(daMovies);//we then invoke getFwakingData(which sets the state of movies) with our new data.
-			}.bind(this),
+			// 	 this.getFwakingData(daMovies);//we then invoke getFwakingData(which sets the state of movies) with our new data.
+			 }.bind(this),
 			error: function(xhr, status, err) {
-        // console.error(this.props.url, status, err.toString());
+        console.error(this.props.url, status, err.toString());
       }.bind(this)
 		})
 	},
@@ -60,11 +71,12 @@ var KingComponent = React.createClass({
 		// console.log("====> state of username: ", this.state.username);
 		// console.log("====> state of id: ", this.state.id);
 		// console.log("====> state of movies: ", this.state.movies);
-		// console.log("===> checking shit out bros", this.state.movies[0]);
+
+		console.log("===> checking shit out bros", this.state.movies);
 		if(this.state.authUser === true){
 			return(
 				<div>
-					<ShowUser movies={this.state.movies[1]} name={this.state.username} />
+					<ShowUser posters={this.state.movies} name={this.state.username} />
 				</div>
 			);
 		} else {
@@ -169,7 +181,7 @@ var FwakingSignUp = React.createClass({
 				password: password,
 			},
 			success: function(data){
-				console.log("===>This is signUpAJAX success data: ", data);
+				// console.log("===>This is signUpAJAX success data: ", data);
 			}.bind(this)
 		});
 	},
@@ -204,14 +216,23 @@ var FwakingSignUp = React.createClass({
 
 var ShowUser =React.createClass({
 	render: function() {
-		// console.log("props ==>", this.props);
-		// console.log(this.props.movies);
+		console.log("props ==>", this.props.posters);
+		var movie = this.props.movies;
+		// console.log(typeof this.props.movies);
+		// console.log("proppsss", this.props.movies);
+		// var movies = this.props.movies;
+		// console.log(movies[1].title);
 		// var movies = this.props.movies.map(function(movie){})
 		
 		return(
 			<div>
 				<h1>Welcome {this.props.name}</h1>
+				<h1>these are your fucking movies bitch:</h1>
+				<img src={this.props.posters[0]} />
+				<br>
+				<img src={this.props.posters[1]} />
 				
+
 			</div>
 
 		);
