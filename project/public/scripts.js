@@ -340,15 +340,41 @@ var FwaukingSearchBar = React.createClass({
 	}
 })
 var ShowSearch = React.createClass({
+	handleClick: function(e) {
+		var id = Cookies("id");
+		this.makeMovie(id);
+	},
+	makeMovie: function(id) {
+		var movieData = {
+		imdbID:this.props.searchData.imdbID,
+		title:this.props.searchData.Title,
+		poster:this.props.searchData.Poster,
+		description:this.props.searchData.Plot,
+		watch: false,
+		rating: "",
+	}
+		$.ajax({
+			url: "/users/" + id + "/newmovie",
+			method:"PUT",
+			data: movieData,
+			success: function(data) {
+				console.log("this is the data from ajax movie stuff",data);
+			}.bind(this)
+		})
+	},
 	render: function() {
+
+
+
 			if (this.props != null) {
-			console.log("these be the props yall >: ", this.props.sea);
+			console.log("these be the props yall >: ", this.props.searchData);
 			return(
 				<div>
 					<p>hello</p>
 					<h1>{this.props.searchData.Title}</h1>
 					<img src={this.props.searchData.Poster} />
 					<p>{this.props.searchData.Plot}</p>
+					<button onClick={this.handleClick}>fork this movie</button>	
 				</div>
 			)
 		} else {
