@@ -15,6 +15,7 @@ var KingComponent = React.createClass({
 			authUser: userCheck,
 			id: "",
 			movies:[],
+			search:"",
 		};
 	},
 	changeLogin: function(){//state is set to the cookies of username and id
@@ -24,6 +25,11 @@ var KingComponent = React.createClass({
 			id: Cookies("id")
 		});
 		this.showAjax();
+	},
+	handleSearchInput: function(text) {
+		this.setState({
+			search: text,
+		});
 	},
 	// getFwakingData: function(movies) {//This method gets our data and sets the state of 
 	// 	// console.log('hey you fuck');
@@ -40,9 +46,8 @@ var KingComponent = React.createClass({
 				// console.log('=======================');
 				// console.log("touch me please " , data.movies);
 				// console.log(typeof data.movies[1]);
-				
 				// this.setState({movies: data.movies[0]});
-				console.log("movie data yo", data.movies[0]);
+				// console.log("movie data yo", data.movies[0]);
 				var moviesArray = this.state.movies;
 				data.movies.forEach(function(movie) {
 					moviesArray.push(
@@ -50,15 +55,6 @@ var KingComponent = React.createClass({
 					);
 				})
 				this.setState({movies: moviesArray});
-
-				// console.log(typeof daMovies);
-				// var title = data.movies[0].title;
-				// var description = data.movies[0].description;
-				// var poster = data.movies[0].poster;
-				// console.log('V', title);
-				// })
-			
-				 // this.setState({movies: title});
 			// 	 this.getFwakingData(daMovies);//we then invoke getFwakingData(which sets the state of movies) with our new data.
 			 }.bind(this),
 			error: function(xhr, status, err) {
@@ -72,18 +68,28 @@ var KingComponent = React.createClass({
 		// console.log("====> state of id: ", this.state.id);
 		// console.log("====> state of movies: ", this.state.movies);
 
-		console.log("===> checking shit out bros", this.state.movies);
+		// console.log("===> checking shit out bros", this.state.movies);
 		if(this.state.authUser === true){
 			return(
 				<div>
-					<ShowUser posters={this.state.movies} name={this.state.username} />
+				<FwaukingSearchBar 
+					text={this.state.search} 
+					onSearchInput={this.handleSearchInput} 
+					/>
+					<ShowUser 
+						posters={this.state.movies} 
+						name={this.state.username} 
+						text={this.state.search}
+					 />
 				</div>
 			);
 		} else {
 			return(
 				<div>
 					<h1>My fwak is dirty!</h1>
-					<FwakingLogin loginCheck={this.state.authUser} onChange={this.changeLogin} />
+					<FwakingLogin 
+						loginCheck={this.state.authUser} 
+						onChange={this.changeLogin} />
 					<FwakingSignUp />
 				</div>
 			);
@@ -101,6 +107,7 @@ var FwakingLogin = React.createClass({
 	},
 	handleLoginFormChange: function(stateName, e){
 		var change = {};
+		console.log(e.target.value);
 		// console.log("===> This is stateName: ", stateName);
 		change[stateName] = e.target.value;
 		this.setState(change);//sets state to the input of login form
@@ -137,7 +144,8 @@ var FwakingLogin = React.createClass({
         <h3>Please Login</h3>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="username">Username</label>
-          <input className="username-login-form" type="text" placeholder="username" onChange={this.handleLoginFormChange.bind(this, 'username')}/>
+          <input className="username-login-form" type="text" placeholder="username" 
+          onChange={this.handleLoginFormChange.bind(this, 'username')}/>
           <br/>
           <label htmlFor="password">Password</label>
           <input className="password-login-form" type="text" placeholder="password" onChange={this.handleLoginFormChange.bind(this, 'password')}/>
@@ -162,7 +170,7 @@ var FwakingSignUp = React.createClass({
 	// },
 	handleSignUpFormChange: function(stateName, e){
 		var change = {};
-		console.log("===> This is stateName: ", stateName);
+		// console.log("===> This is stateName: ", stateName);
 		change[stateName] = e.target.value;
 		this.setState(change);//sets state to the input of signup form
 	},
@@ -216,10 +224,10 @@ var FwakingSignUp = React.createClass({
 
 var ShowUser = React.createClass({
 	render: function() {
-		console.log("props ==>", this.props.posters);
+		// console.log("props ==>", this.props.posters);
 		var movie = this.props.movies;
 		var poster = this.props.posters;
-		console.log("====>This is poster: ", posters);
+		// console.log("====>This is poster: ", posters);
 		var posters = poster.map(function(poster){
 			return <img src={poster}/>
 		});
@@ -235,7 +243,7 @@ var ShowUser = React.createClass({
 		// var movies = this.props.movies.map(function(movie){})
 		return(
 			<div>
-			<FwaukingSearchBar />
+			
 				<h1>Welcome {this.props.name}</h1>
         <h1>these are your fucking movies bitch:</h1>
        {posters}
@@ -245,11 +253,27 @@ var ShowUser = React.createClass({
 });
 
 var FwaukingSearchBar = React.createClass({
+	handleSearchChange: function(e) {
+		console.log(e.target.value);
+		this.props.onSearchInput(
+			this.refs.textInput.value
+		);
+	},
 	render: function() {
+
 		return(
 			<div className="searchForm" >
-			<form>
-				<input type="text" placeholder="seach some fwauking thing" />
+			<form onSubmit={this.handleSubmit}>
+				<label htmlFor="search">Search some Fwauking movie</label>
+				<br />
+				<input 
+					className="search-barForm" 
+					type="text" 
+					placeholder="search" 
+						value={this.props.text}
+					ref="textInput"
+        	onChange={this.handleSearchChange}
+        />
 				<button>fwauking button</button>
 			</form>
 			</div>
