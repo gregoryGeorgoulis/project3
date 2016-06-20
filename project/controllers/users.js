@@ -20,16 +20,7 @@ router.post('/', function(req,res){
 	});
 });
 
-///Edit Movie
-router.put('/:id/edit/:movie_id', function(req,res){
-	console.log('testing edit movie');
-	console.log(req.body);
-	Movie.findByIdAndUpdate(req.params.movie_id, {watched: req.body.watched, rating: req.body.rating}, function(err,movie){
-		if (err) {
-			console.log(err);
-		}
-	});
-});
+
 
 ////Requires User Authentication
 router.use(passport.authenticate('jwt', { session: false }));
@@ -42,6 +33,17 @@ router.get('/:id', function(req,res){
 		console.log(req.params)
 		res.json(user);
 
+	});
+});
+
+///Edit Movie
+router.put('/:id/edit/:movie_id', function(req,res){
+	console.log('testing edit movie');
+	console.log(req.body);
+	Movie.findByIdAndUpdate(req.params.movie_id, {watched: req.body.watched, rating: req.body.rating}, function(err,movie){
+		if (err) {
+			console.log(err);
+		}
 	});
 });
 
