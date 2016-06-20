@@ -16,6 +16,7 @@ var KingComponent = React.createClass({
 			id: "",
 			movies:[],
 			search:"",
+			searchMovie: [],
 		};
 	},
 	changeLogin: function(){//state is set to the cookies of username and id
@@ -30,6 +31,11 @@ var KingComponent = React.createClass({
 		this.setState({
 			search: text,
 		});
+	},
+	changeSearchState: function(data) {
+		this.setState({
+			searchMovie: data,
+		})
 	},
 	// getFwakingData: function(movies) {//This method gets our data and sets the state of 
 	// 	// console.log('hey you fuck');
@@ -74,7 +80,8 @@ var KingComponent = React.createClass({
 				<div>
 				<FwaukingSearchBar 
 					text={this.state.search} 
-					onSearchInput={this.handleSearchInput} 
+					onSearchInput={this.handleSearchInput}
+					onChange{this.changeSearchState}
 					/>
 					<ShowUser 
 						posters={this.state.movies} 
@@ -231,11 +238,7 @@ var ShowUser = React.createClass({
 		var posters = poster.map(function(poster){
 			return <img src={poster}/>
 		});
-		// var posters = function(){
-		// 	for(var i = 0; i < poster.length; i++){
-				
-		// 	}
-		// }
+
 		// console.log(typeof this.props.movies);
 		// console.log("proppsss", this.props.movies);
 		// var movies = this.props.movies;
@@ -243,7 +246,6 @@ var ShowUser = React.createClass({
 		// var movies = this.props.movies.map(function(movie){})
 		return(
 			<div>
-			
 				<h1>Welcome {this.props.name}</h1>
         <h1>these are your fucking movies bitch:</h1>
        {posters}
@@ -259,6 +261,21 @@ var FwaukingSearchBar = React.createClass({
 			this.refs.textInput.value
 		);
 	},
+	handleSubmit: function(e) {
+		e.preventDefault();
+		var searchText = this.props.text.trim();
+		console.log(searchText);
+		this.omdbAjax(searchText);
+	}, 
+	omdbAjax: function(searchText) {
+		$.ajax({
+			url:"http://www.omdbapi.com/?t=" + searchText,
+			method:"GET",
+			success: function(data) {
+				console.log(data);
+			}.bind(this)
+		});
+	},
 	render: function() {
 
 		return(
@@ -270,7 +287,7 @@ var FwaukingSearchBar = React.createClass({
 					className="search-barForm" 
 					type="text" 
 					placeholder="search" 
-						value={this.props.text}
+					value={this.props.text}
 					ref="textInput"
         	onChange={this.handleSearchChange}
         />
@@ -280,6 +297,13 @@ var FwaukingSearchBar = React.createClass({
 		)
 	}
 })
+// var ShowSearch = React.createClass({
+// 	render: function() {
+// 		return(
+
+// 		)
+// 	}
+// })
 
 // ==========================
 //  REACT DOM
