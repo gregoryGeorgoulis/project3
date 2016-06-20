@@ -17,6 +17,7 @@ var KingComponent = React.createClass({
 			movies:[],
 			search:"",
 			searchMovie: [],
+			display: 'user'
 		};
 	},
 	changeLogin: function(){//state is set to the cookies of username and id
@@ -36,6 +37,14 @@ var KingComponent = React.createClass({
 		this.setState({
 			searchMovie: data,
 		})
+	},
+	changeDisplay: function(){
+		console.log('changeDisplay is working');
+		if (this.state.display === 'user'){
+			this.setState({display: 'search'});
+		} else {
+			this.setState({display: 'user'});
+		}
 	},
 	// getFwakingData: function(movies) {//This method gets our data and sets the state of 
 	// 	// console.log('hey you fuck');
@@ -75,12 +84,14 @@ var KingComponent = React.createClass({
 		// console.log("====> state of movies: ", this.state.movies);
 		// console.log("===> checking shit out bros", this.state.movies);
 		if(this.state.authUser === true){
+			if(this.state.display === 'user'){
 			return(
 				<div>
 				<FwaukingSearchBar 
 					text={this.state.search} 
 					onSearchInput={this.handleSearchInput}
 					onChange={this.changeSearchState}
+					changeDisplay={this.changeDisplay}
 					/>
 					<ShowUser 
 						movies={this.state.movies} 
@@ -88,7 +99,14 @@ var KingComponent = React.createClass({
 						text={this.state.search}
 					 />
 				</div>
-			);
+			)
+			}else {
+				return(
+					<ShowSearch
+						display={this.state.display}
+					/>
+				)
+		}
 		} else {
 			return(
 				<div>
@@ -232,12 +250,10 @@ var ShowUser = React.createClass({
 	render: function() {
 		// console.log("props ==>", this.props.posters);
 
-		var movies = this.props.movies;
-		console.log('movies:');
-		console.log(movies);
-		console.log(movies[0]);
-		// console.log(movies[0].title);
-		// var poster = this.props.posters;
+		console.log(this.props.movies);
+		var movie = this.props.movies;
+		var poster = this.props.posters;
+
 		// console.log("====>This is poster: ", posters);
 		
 
@@ -283,9 +299,11 @@ var FwaukingSearchBar = React.createClass({
 	},
 	handleSubmit: function(e) {
 		e.preventDefault();
+		console.log(this.state);
 		var searchText = this.props.text.trim();
 		console.log(searchText);
 		this.omdbAjax(searchText);
+		this.props.changeDisplay();
 	}, 
 	omdbAjax: function(searchText) {
 		$.ajax({
@@ -295,6 +313,7 @@ var FwaukingSearchBar = React.createClass({
 				console.log("===> This is the data type of results below: ", typeof data);
 				console.log(data);
 				this.props.onChange(data);
+
 			}.bind(this)
 		});
 	},
@@ -319,13 +338,13 @@ var FwaukingSearchBar = React.createClass({
 		)
 	}
 })
-// var ShowSearch = React.createClass({
-// 	render: function() {
-// 		return(
-
-// 		)
-// 	}
-// })
+var ShowSearch = React.createClass({
+	render: function() {
+		return(
+			<p>hello</p>
+		)
+	}
+})
 
 // ==========================
 //  REACT DOM
