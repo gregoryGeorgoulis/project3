@@ -43,6 +43,7 @@ var KingComponent = React.createClass({
 		if (this.state.display === 'user'){
 			this.setState({display: 'search'});
 		} else {
+			this.showAjax();
 			this.setState({display: 'user'});
 		}
 	},
@@ -63,13 +64,14 @@ var KingComponent = React.createClass({
 				// console.log(typeof data.movies[1]);
 				// this.setState({movies: data.movies[0]});
 				// console.log("movie data yo", data.movies[0]);
-				var moviesArray = this.state.movies;
+				var moviesArray = [];
 				data.movies.forEach(function(movie) {
 					moviesArray.push(
 					 movie
 					);
 				})
 				this.setState({movies: moviesArray});
+				console.log('testing showajax');
 			// 	 this.getFwakingData(daMovies);//we then invoke getFwakingData(which sets the state of movies) with our new data.
 			 }.bind(this),
 			error: function(xhr, status, err) {
@@ -105,6 +107,7 @@ var KingComponent = React.createClass({
 					<ShowSearch
 						display={this.state.display}
 						searchData={this.state.searchMovie}
+						changeDisplay={this.changeDisplay}
 					/>
 				)
 		}
@@ -359,6 +362,7 @@ var ShowSearch = React.createClass({
 			data: movieData,
 			success: function(data) {
 				console.log("this is the data from ajax movie stuff",data);
+				this.props.changeDisplay();
 			}.bind(this)
 		})
 	},
