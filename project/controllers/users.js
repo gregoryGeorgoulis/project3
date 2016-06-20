@@ -20,6 +20,17 @@ router.post('/', function(req,res){
 	});
 });
 
+///Edit Movie
+router.put('/:id/edit/:movie_id', function(req,res){
+	console.log('testing edit movie');
+	console.log(req.body);
+	Movie.findByIdAndUpdate(req.params.movie_id, {watched: req.body.watched, rating: req.body.rating}, function(err,movie){
+		if (err) {
+			console.log(err);
+		}
+	});
+});
+
 ////Requires User Authentication
 router.use(passport.authenticate('jwt', { session: false }));
 ///Show User
@@ -81,6 +92,7 @@ router.put('/:id/newmovie/', function(req,res){
 		});
 	});
 });
+
 
 ///Delete Movie
 router.delete('/:id/delete/:movie_id', function(req,res){
