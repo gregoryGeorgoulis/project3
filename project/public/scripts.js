@@ -17,6 +17,7 @@ var KingComponent = React.createClass({
 			movies:[],
 			search:"",
 			searchMovie: [],
+			display: 'user'
 		};
 	},
 	changeLogin: function(){//state is set to the cookies of username and id
@@ -36,6 +37,14 @@ var KingComponent = React.createClass({
 		this.setState({
 			searchMovie: data,
 		})
+	},
+	changeDisplay: function(){
+		console.log('changeDisplay is working');
+		if (this.state.display === 'user'){
+			this.setState({display: 'search'});
+		} else {
+			this.setState({display: 'user'});
+		}
 	},
 	// getFwakingData: function(movies) {//This method gets our data and sets the state of 
 	// 	// console.log('hey you fuck');
@@ -76,12 +85,14 @@ var KingComponent = React.createClass({
 
 		// console.log("===> checking shit out bros", this.state.movies);
 		if(this.state.authUser === true){
+			if(this.state.display === 'user'){
 			return(
 				<div>
 				<FwaukingSearchBar 
 					text={this.state.search} 
 					onSearchInput={this.handleSearchInput}
 					onChange={this.changeSearchState}
+					changeDisplay={this.changeDisplay}
 					/>
 					<ShowUser 
 						posters={this.state.movies} 
@@ -89,7 +100,14 @@ var KingComponent = React.createClass({
 						text={this.state.search}
 					 />
 				</div>
-			);
+			)
+			}else {
+				return(
+					<ShowSearch
+						display={this.state.display}
+					/>
+				)
+		}
 		} else {
 			return(
 				<div>
@@ -232,6 +250,7 @@ var FwakingSignUp = React.createClass({
 var ShowUser = React.createClass({
 	render: function() {
 		// console.log("props ==>", this.props.posters);
+		console.log(this.props.movies);
 		var movie = this.props.movies;
 		var poster = this.props.posters;
 		// console.log("====>This is poster: ", posters);
@@ -263,9 +282,11 @@ var FwaukingSearchBar = React.createClass({
 	},
 	handleSubmit: function(e) {
 		e.preventDefault();
+		console.log(this.state);
 		var searchText = this.props.text.trim();
 		console.log(searchText);
 		this.omdbAjax(searchText);
+		this.props.changeDisplay();
 	}, 
 	omdbAjax: function(searchText) {
 		$.ajax({
@@ -274,6 +295,7 @@ var FwaukingSearchBar = React.createClass({
 			success: function(data) {
 				console.log("===> This is the data type of results below: ", typeof data);
 				console.log(data);
+				console.log()
 			}.bind(this)
 		});
 	},
@@ -298,13 +320,13 @@ var FwaukingSearchBar = React.createClass({
 		)
 	}
 })
-// var ShowSearch = React.createClass({
-// 	render: function() {
-// 		return(
-
-// 		)
-// 	}
-// })
+var ShowSearch = React.createClass({
+	render: function() {
+		return(
+			<p>hello</p>
+		)
+	}
+})
 
 // ==========================
 //  REACT DOM
