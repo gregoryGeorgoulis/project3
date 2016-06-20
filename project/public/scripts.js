@@ -104,6 +104,7 @@ var KingComponent = React.createClass({
 				return(
 					<ShowSearch
 						display={this.state.display}
+						searchData={this.state.searchMovie}
 					/>
 				)
 		}
@@ -251,8 +252,8 @@ var ShowUser = React.createClass({
 		// console.log("props ==>", this.props.posters);
 
 		console.log(this.props.movies);
-		var movie = this.props.movies;
-		var poster = this.props.posters;
+		var movies = this.props.movies;
+		
 
 		// console.log("====>This is poster: ", posters);
 		
@@ -340,9 +341,21 @@ var FwaukingSearchBar = React.createClass({
 })
 var ShowSearch = React.createClass({
 	render: function() {
-		return(
-			<p>hello</p>
-		)
+			if (this.props != null) {
+			console.log("these be the props yall >: ", this.props.sea);
+			return(
+				<div>
+					<p>hello</p>
+					<h1>{this.props.searchData.Title}</h1>
+					<img src={this.props.searchData.Poster} />
+					<p>{this.props.searchData.Plot}</p>
+				</div>
+			)
+		} else {
+			return(
+				<h1>you fwauked the search up</h1>
+			)
+		}
 	}
 })
 
