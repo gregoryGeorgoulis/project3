@@ -57,7 +57,7 @@ var KingComponent = React.createClass({
 				var moviesArray = this.state.movies;
 				data.movies.forEach(function(movie) {
 					moviesArray.push(
-					 movie.poster
+					 movie
 					);
 				})
 				this.setState({movies: moviesArray});
@@ -73,7 +73,6 @@ var KingComponent = React.createClass({
 		// console.log("====> state of username: ", this.state.username);
 		// console.log("====> state of id: ", this.state.id);
 		// console.log("====> state of movies: ", this.state.movies);
-
 		// console.log("===> checking shit out bros", this.state.movies);
 		if(this.state.authUser === true){
 			return(
@@ -84,7 +83,7 @@ var KingComponent = React.createClass({
 					onChange={this.changeSearchState}
 					/>
 					<ShowUser 
-						posters={this.state.movies} 
+						movies={this.state.movies} 
 						name={this.state.username} 
 						text={this.state.search}
 					 />
@@ -232,25 +231,46 @@ var FwakingSignUp = React.createClass({
 var ShowUser = React.createClass({
 	render: function() {
 		// console.log("props ==>", this.props.posters);
-		var movie = this.props.movies;
-		var poster = this.props.posters;
+
+		var movies = this.props.movies;
+		console.log('movies:');
+		console.log(movies);
+		console.log(movies[0]);
+		// console.log(movies[0].title);
+		// var poster = this.props.posters;
 		// console.log("====>This is poster: ", posters);
-		var posters = poster.map(function(poster){
-			return <img src={poster}/>
-		});
+		
 
 		// console.log(typeof this.props.movies);
 		// console.log("proppsss", this.props.movies);
 		// var movies = this.props.movies;
 		// console.log(movies[1].title);
 		// var movies = this.props.movies.map(function(movie){})
-		return(
-			<div>
-				<h1>Welcome {this.props.name}</h1>
-        <h1>these are your fucking movies bitch:</h1>
-       {posters}
-	    </div>
-    );
+
+
+		if (movies.length > 0) {
+			var posters = movies.map(function(movie){
+			return <img src={movie.poster}/>
+		});
+			console.log("this is movie title", movies[0].title);
+			return(
+				<div>
+					<h1>Welcome {this.props.name}</h1>
+					<h1>{this.props.name}lishous</h1>
+					<h1>{this.props.name}rooney</h1>
+					<h1>{this.props.name}batootie</h1>
+	        <h1>these are your fwauking movies bitch:</h1>
+	        {posters}
+		    </div>
+	    );
+		} else {
+			return(
+				<div>
+					<h1>you have no movies sad face</h1>
+				</div>
+			)
+
+		}
 	}
 });
 
@@ -272,7 +292,8 @@ var FwaukingSearchBar = React.createClass({
 			url:"http://www.omdbapi.com/?t=" + searchText,
 			method:"GET",
 			success: function(data) {
-				console.log(data.Title);
+				console.log(data);
+				changeSearchState(data);
 			}.bind(this)
 		});
 	},
