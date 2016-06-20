@@ -366,6 +366,10 @@ var ShowSearch = React.createClass({
 			}.bind(this)
 		})
 	},
+	goBack: function(e) {
+		e.preventDefault();
+		this.props.changeDisplay();
+	},
 	render: function() {
 
 
@@ -379,6 +383,7 @@ var ShowSearch = React.createClass({
 					<img src={this.props.searchData.Poster} />
 					<p>{this.props.searchData.Plot}</p>
 					<button onClick={this.handleClick}>fork this movie</button>	
+					<button onClick={this.goBack}>Go back to your User Page!</button>
 				</div>
 			)
 		} else {
