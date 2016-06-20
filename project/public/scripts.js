@@ -81,7 +81,7 @@ var KingComponent = React.createClass({
 				<FwaukingSearchBar 
 					text={this.state.search} 
 					onSearchInput={this.handleSearchInput}
-					onChange{this.changeSearchState}
+					onChange={this.changeSearchState}
 					/>
 					<ShowUser 
 						posters={this.state.movies} 
@@ -272,7 +272,7 @@ var FwaukingSearchBar = React.createClass({
 			url:"http://www.omdbapi.com/?t=" + searchText,
 			method:"GET",
 			success: function(data) {
-				console.log(data);
+				console.log(data.Title);
 			}.bind(this)
 		});
 	},
