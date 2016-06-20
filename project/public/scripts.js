@@ -294,7 +294,7 @@ var FwaukingSearchBar = React.createClass({
 			success: function(data) {
 				console.log("===> This is the data type of results below: ", typeof data);
 				console.log(data);
-				changeSearchState(data);
+				this.props.onChange(data);
 			}.bind(this)
 		});
 	},
