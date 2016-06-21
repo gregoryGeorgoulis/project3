@@ -72,20 +72,25 @@ router.delete('/:id', function(req,res){
 });
 
 ///Get Movie Data
-router.get('/:movie_id', function(req,res){
-	Movie.findById(req.params.movie_id, function(err,movie){
+router.get('/movies/:id/:movie_id', function(req,res){
+	console.log('testing get movies route');
+	console.log('this is the id:' +req.params.movie_id);
+	User.findById(req.params.id, function(err,user){
 		if (err) {
 			console.log(err);
 		}
-		res.json(movie);
-	})
-})
+		res.json(user.movies);
+	});
+});
 
 ///Create Movie
 router.put('/:id/newmovie/', function(req,res){
 	console.log(req.body);
 	Movie.create(req.body, function(err,movie){
+		console.log('-----------------------------------------------------------');
 		console.log('adding movie');
+		console.log('movie:');
+		console.log(movie);
 		if (err) {
 			console.log(err);
 		}
@@ -100,7 +105,7 @@ router.put('/:id/newmovie/', function(req,res){
 			user.save();
 			console.log('updated movies below');
 			console.log(user.movies);
-			res.send(true);
+			res.send(movie);
 		});
 	});
 });
