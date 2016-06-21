@@ -47,6 +47,14 @@ var KingComponent = React.createClass({
 			this.setState({display: 'user'});
 		}
 	},
+	changeToMovieInfoDisplay: function(){
+        console.log("change to movie info display is working");
+        if (this.state.display === 'user'){
+            this.setState({display: 'movieInfo'});
+        } else {
+            this.setState({display: 'user'});
+        }
+    },
 	// getFwakingData: function(movies) {//This method gets our data and sets the state of 
 	// 	// console.log('hey you fuck');
 	// 	// console.log("fuck you and ur fat cunt" ,movies.movies[1].title);
@@ -96,13 +104,18 @@ var KingComponent = React.createClass({
 					changeDisplay={this.changeDisplay}
 					/>
 					<ShowUser 
+						movieInfo={this.changeToMovieInfoDisplay}
 						movies={this.state.movies} 
 						name={this.state.username} 
 						text={this.state.search}
 					 />
 				</div>
 			)
-			}else {
+			}else if (this.state.display === 'movieInfo') {
+				<div>how, YOU doing ;)</div>
+
+			}
+			{
 				return(
 					<ShowSearch
 						display={this.state.display}
@@ -111,6 +124,7 @@ var KingComponent = React.createClass({
 					/>
 				)
 		}
+
 		} else {
 			return(
 				<div>
@@ -251,6 +265,10 @@ var FwakingSignUp = React.createClass({
 
 
 var ShowUser = React.createClass({
+	   handleClick: function(){
+        console.log("Clicking and Clicking! Yeaaaahhh")
+        this.props.movieInfo();
+    },
 	render: function() {
 		// console.log("props ==>", this.props.posters);
 
@@ -269,8 +287,9 @@ var ShowUser = React.createClass({
 
 
 		if (movies.length > 0) {
+			var selfie = this;
 			var posters = movies.map(function(movie){
-			return <img src={movie.poster}/>
+			return <img src={movie.poster} onClick={selfie.handleClick}/>
 		});
 			console.log("this is movie title", movies[0].title);
 			return(
@@ -378,7 +397,7 @@ var ShowSearch = React.createClass({
 			console.log("these be the props yall >: ", this.props.searchData);
 			return(
 				<div>
-					<p>hello</p>
+					<p>hello person</p>
 					<h1>{this.props.searchData.Title}</h1>
 					<img src={this.props.searchData.Poster} />
 					<p>{this.props.searchData.Plot}</p>
