@@ -20,7 +20,7 @@ h1 {
 	text-shadow: 2px 2px 8px #FF0000;
 }
 
-.welcome-user, .search-result-title {
+.welcome-user, .search-result-title, .movie-display-header {
 	font-size: 30px;
 	padding: 0px;
 }
@@ -28,6 +28,11 @@ h1 {
 	font-size: 10px;
 	display: inline-block;
 	margin-left: 10px;
+	text-decoration: underline;
+}
+.aka1{
+	font-size: 10px;
+	text-decoration: underline;
 }
 
 label {
@@ -52,15 +57,41 @@ p {
 	color: black;
 }
 
-.searchForm {
- 
+.username-login-form[type=text]:focus{
+	outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #8EFF1A;
 }
-
+.password-login-form[type=text]:focus{
+	outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #8EFF1A;
+}
+.username-signup-form[type=text]:focus{
+	outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #8EFF1A;
+}
+.search-barForm[type=text]:focus{
+	outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #8EFF1A;
+}
+.password-signup-form[type=text]:focus{
+	outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #8EFF1A;
+}
 .search-button{
 	font-size: 6.5px;
 }
 
-.wanted-movies, .search-movie-info {
+.wanted-movies, .search-movie-info, .movie-display {
  font-size: 11px;
 }
 
@@ -77,7 +108,7 @@ p {
 	height: 200px;
 	width: 132px;
 	display: inline-block;
-	margin-left: 5px;
+	margin-left: 9px;
 }
 
 img {
@@ -98,6 +129,7 @@ img {
 .search-image {
 	height: 250px;
 	width: 200px;
+	box-shadow: 15px 10px 22px 0px rgba(0,0,0,0.75);
 }
 
 button {
@@ -107,23 +139,35 @@ button {
 	margin-left: 5px
 }
 
+/*Movie Info Display*/
+#movie-display-container{
+	text-align: center;
+}
+
+.movie-display-title{
+	font-size: 12px
+}
+/*.movie-dispaly-desc {
+	text-align: justify;
+}*/
+
 @media(min-width: 521px) {
 
 	.welcome-user{
 		font-size: 1.5em;
 		padding: 0px;
 	} 
-	.search-result-title {
+	.search-result-title, .movie-display-header{
 	font-size: 1.5em;
 	padding: 13px;
 	}
 	.aka {
-		font-size: 20px;
+		font-size: 16px;
 		display: inline-block;
 		margin-left: 10px;
 		padding: 18px;
 	}
-	.wanted-movies, .search-movie-info {
+	.wanted-movies, .search-movie-info, .movie-display {
  		font-size: 2rem;
 	}
 
@@ -144,10 +188,11 @@ button {
 		height: 303px;
 		width: 200px;
 		display: inline-block;
-		margin-left: 5px;
+		margin-left: 12px;
+		box-shadow: 3px 3px 10px 0px red;
 	}
 	
-	.search-label {
+	.search-label, .movie-display-title {
 		font-size: 2rem;
 	}
 
@@ -164,8 +209,9 @@ button {
 	.search-image {
 		height: 350px;
 		width: 200px;
+		box-shadow: 15px 10px 22px 0px rgba(0,0,0,0.75);
 	}
-
+	
 	button {
 		font-size: 10px;
 		display: inline-block;
