@@ -207,7 +207,7 @@ var FwakingLogin = React.createClass({
 		return(
 			<div className="login-form" >
         <h3>Please Login</h3>
-        <form onSubmit={this.handleSubmit}>
+        <form className="log" onSubmit={this.handleSubmit}>
           <label htmlFor="username">Username</label>
           <input className="username-login-form" type="text" placeholder="username" 
           onChange={this.handleLoginFormChange.bind(this, 'username')}/>
@@ -262,7 +262,7 @@ var FwakingSignUp = React.createClass({
 		return(
 			<div className="signup-form" >
 				<h3>SignUp Fam!</h3>
-				<form onSubmit={this.handleSubmit}>
+				<form className="log" onSubmit={this.handleSubmit}>
 					<label htmlFor="username">Username</label>
 					<input 
 						className="username-signup-form" 
@@ -326,9 +326,9 @@ var ShowUser = React.createClass({
 			console.log("this is movie title", movies[0].title);
 			return(
 				<div>
-					<h1>Welcome {this.props.name}</h1>
+					<h1 className="welcome-user">Welcome {this.props.name}</h1>
 	        <p className="wanted-movies">Check out my fwauking movies baaatch:</p>
-	        {posters}
+	        <div className="user-movies">{posters}</div>
 		    </div>
 	    );
 		} else {
@@ -374,8 +374,7 @@ var FwaukingSearchBar = React.createClass({
 		return(
 			<div className="searchForm" >
 			<form onSubmit={this.handleSubmit}>
-				<label htmlFor="search">Search some Fwauking movie</label>
-				<br />
+				<label className="search-label" htmlFor="search">Search some Fwauking movie</label>
 				<input 
 					className="search-barForm" 
 					type="text" 

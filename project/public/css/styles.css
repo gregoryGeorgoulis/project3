@@ -7,17 +7,30 @@ body {
 }
 
 div {
-	display: inline-block;
+	/*display: inline-block;*/
+}
+
+.log {
+	padding-bottom: 5em;
 }
 
 h1 {
 	font-size: 30px;
-
+	padding: 40px;
 }
 
+.welcome-user {
+	font-size: 26px;
+	padding: 25px;
+}
 label {
 	font-size: 10px;
 }
+
+p {
+ 	padding-bottom: 2em;
+}
+
 .login-form, .signup-form, .search-barForm, button {
 	font-size: 10px;
 }
@@ -36,16 +49,16 @@ label {
 }
 
 .search-button{
-	font-size: 5px;
+	font-size: 6.5px;
 }
 
 .wanted-movies, .search-movie-info {
- font-size: 10px;
+ font-size: 11px;
 }
 
 .movie-posters {
-	height: 120px;
-	width: 100px;
+	height: 226px;
+	width: 132px;
 	display: inline-block;
 	margin-left: 5px;
 }
@@ -55,6 +68,18 @@ img {
 	height: 100%;
 }
 
+.user-movies {
+	height: 22rem;
+	white-space: nowrap;
+	padding-bottom: 3rem;
+	overflow: auto;
+	overflow-x:scroll; 
+	overflow-y:hidden;
+}
+
+.search-label {
+	font-size: 14px;
+}
 /*Search Display*/
 
 .search-image {
