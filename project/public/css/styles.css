@@ -7,25 +7,44 @@ body {
 }
 
 h1 {
+	font-size: 30px;
 
 }
 
-.login-form, .signup-form {
+label {
+	font-size: 10px;
+}
+.login-form, .signup-form, .search-barForm {
 	font-size: 10px;
 }
 
-.login-form-submit, .signup-form-submit {
+.login-form-submit, .signup-form-submit, .search-button {
 	background-color: #5C1223;
+
 }
 
-.username-login-form, .password-login-form, .username-signup-form, .password-signup-form {
+.username-login-form, .password-login-form, .username-signup-form, .password-signup-form, .search-barForm {
 	color: black;
 }
 
-.movie-posters {
-	
+.searchForm {
+ 
+}
+
+.search-button{
+	font-size: 5px;
 }
 
 .wanted-movies {
+ font-size: 10px;
+}
 
+.movie-posters {
+	height: 75px;
+	width: 75px;
+	display: inline-block;
+}
+
+img {
+	width: 100%;
 }

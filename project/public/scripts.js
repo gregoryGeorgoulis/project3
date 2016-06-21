@@ -327,7 +327,6 @@ var ShowUser = React.createClass({
 			return(
 				<div>
 					<h1>Welcome {this.props.name}</h1>
-					<br>
 	        <p className="wanted-movies">Check out my fwauking movies baaatch:</p>
 	        {posters}
 		    </div>
@@ -385,7 +384,7 @@ var FwaukingSearchBar = React.createClass({
 					ref="textInput"
         	onChange={this.handleSearchChange}
         />
-				<button>fwauking button</button>
+				<button className="search-button">fwauking button</button>
 			</form>
 			</div>
 		)
