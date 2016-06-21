@@ -375,6 +375,7 @@ var FwaukingSearchBar = React.createClass({
 			<div className="searchForm" >
 			<form onSubmit={this.handleSubmit}>
 				<label className="search-label" htmlFor="search">Search some Fwauking movie</label>
+				<br/>
 				<input 
 					className="search-barForm" 
 					type="text" 
@@ -425,8 +426,7 @@ var ShowSearch = React.createClass({
 			console.log("these be the props yall >: ", this.props.searchData);
 			return(
 				<div>
-					<p>hello person</p>
-					<h1>{this.props.searchData.Title}</h1>
+					<h1 className="search-result-title">{this.props.searchData.Title}</h1>
 					<img src={this.props.searchData.Poster} className="search-image" />
 					<p className="search-movie-info">{this.props.searchData.Plot}</p>
 					<button onClick={this.handleClick}>fork this movie</button>	
@@ -449,9 +449,9 @@ var MovieDisplay = React.createClass({
 	render: function(){
 		return(
 			<div>
-			<p>This is movie display</p>
+			<p className="movie-display-info">This is movie display</p>
 			<p>{this.props.currentMovie}</p>
-			<button onClick={this.handleClick}>Back to User Page</button>
+			<button className="movie-display-button" onClick={this.handleClick}>Back to User Page</button>
 			</div>
 		)
 	}

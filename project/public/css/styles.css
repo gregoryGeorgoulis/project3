@@ -11,31 +11,33 @@ div {
 }
 
 .log {
-	padding-bottom: 5em;
+	padding-bottom: 3em;
 }
 
 h1 {
-	font-size: 30px;
+	font-size: 35px;
 	padding: 40px;
+	text-shadow: 2px 2px 8px #FF0000;
 }
 
-.welcome-user {
+.welcome-user, .search-result-title {
 	font-size: 26px;
-	padding: 25px;
+	padding: 13px;
 }
 label {
 	font-size: 10px;
 }
 
 p {
+	padding-top: 1em;
  	padding-bottom: 2em;
 }
 
-.login-form, .signup-form, .search-barForm, button {
+.login-form, .signup-form, .search-barForm, .movie-display-button, button {
 	font-size: 10px;
 }
 
-.login-form-submit, .signup-form-submit, .search-button, button {
+.login-form-submit, .signup-form-submit, .search-button, .movie-display-button, button {
 	background-color: #5C1223;
 
 }
@@ -56,8 +58,17 @@ p {
  font-size: 11px;
 }
 
+.user-movies {
+	height: 20rem;
+	white-space: nowrap;
+	padding-bottom: 3rem;
+	overflow: auto;
+	overflow-x:scroll; 
+	overflow-y:hidden;
+}
+
 .movie-posters {
-	height: 226px;
+	height: 200px;
 	width: 132px;
 	display: inline-block;
 	margin-left: 5px;
@@ -68,14 +79,6 @@ img {
 	height: 100%;
 }
 
-.user-movies {
-	height: 22rem;
-	white-space: nowrap;
-	padding-bottom: 3rem;
-	overflow: auto;
-	overflow-x:scroll; 
-	overflow-y:hidden;
-}
 
 .search-label {
 	font-size: 14px;
@@ -92,4 +95,43 @@ button {
 	display: inline-block;
 	padding: 5px;
 	margin-left: 5px
+}
+
+@media(max-width: 721px) {
+
+	.welcome-user, .search-result-title {
+	font-size: 1.5em;
+	padding: 13px;
+	}
+
+	.wanted-movies, .search-movie-info {
+ 		font-size: 2rem;
+	}
+
+	p {
+		padding-top: 10px;
+	 	padding-bottom: 2px;
+	}
+	.user-movies {
+		height: 30rem;
+		white-space: nowrap;
+		padding-bottom: 3rem;
+		overflow: auto;
+		overflow-x:scroll; 
+		overflow-y:hidden;
+	}
+
+	.movie-posters {
+		height: 303px;
+		width: 200px;
+		display: inline-block;
+		margin-left: 5px;
+	}
+
+
+
+
+
+
+
 }
