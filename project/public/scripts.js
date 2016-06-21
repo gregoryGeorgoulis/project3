@@ -150,7 +150,7 @@ var KingComponent = React.createClass({
 		} else {
 			return(
 				<div>
-					<h1>My fwak is dirty!</h1>
+					<h1>3 Fwauks Movies</h1>
 					<FwakingLogin 
 						loginCheck={this.state.authUser} 
 						onChange={this.changeLogin} />
