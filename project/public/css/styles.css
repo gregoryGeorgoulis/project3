@@ -1,0 +1,182 @@
+body {
+	background-color: #00203F;
+	font-family: 'Rock Salt', cursive;
+	color: white;
+	font-size: 30px;
+	text-align: center;
+}
+
+div {
+	/*display: inline-block;*/
+}
+
+.log {
+	padding-bottom: 3em;
+}
+
+h1 {
+	font-size: 35px;
+	padding: 40px;
+	text-shadow: 2px 2px 8px #FF0000;
+}
+
+.welcome-user, .search-result-title {
+	font-size: 30px;
+	padding: 0px;
+}
+.aka {
+	font-size: 10px;
+	display: inline-block;
+	margin-left: 10px;
+}
+
+label {
+	font-size: 10px;
+}
+
+p {
+	padding-top: 1em;
+ 	padding-bottom: 1em;
+}
+
+.login-form, .signup-form, .search-barForm, .movie-display-button, button {
+	font-size: 10px;
+}
+
+.login-form-submit, .signup-form-submit, .search-button, .movie-display-button, button {
+	background-color: #5C1223;
+
+}
+
+.username-login-form, .password-login-form, .username-signup-form, .password-signup-form, .search-barForm {
+	color: black;
+}
+
+.searchForm {
+ 
+}
+
+.search-button{
+	font-size: 6.5px;
+}
+
+.wanted-movies, .search-movie-info {
+ font-size: 11px;
+}
+
+.user-movies {
+	height: 20rem;
+	white-space: nowrap;
+	padding-bottom: 3rem;
+	overflow: auto;
+	overflow-x:scroll; 
+	overflow-y:hidden;
+}
+
+.movie-posters {
+	height: 200px;
+	width: 132px;
+	display: inline-block;
+	margin-left: 5px;
+}
+
+img {
+	width: 100%;
+	height: 100%;
+}
+
+
+.search-label {
+	font-size: 14px;
+}
+/*Search Display*/
+
+.search-result-title {
+	padding-top: 30px;
+}
+
+.search-image {
+	height: 250px;
+	width: 200px;
+}
+
+button {
+	font-size: 10px;
+	display: inline-block;
+	padding: 5px;
+	margin-left: 5px
+}
+
+@media(min-width: 521px) {
+
+	.welcome-user{
+		font-size: 1.5em;
+		padding: 0px;
+	} 
+	.search-result-title {
+	font-size: 1.5em;
+	padding: 13px;
+	}
+	.aka {
+		font-size: 20px;
+		display: inline-block;
+		margin-left: 10px;
+		padding: 18px;
+	}
+	.wanted-movies, .search-movie-info {
+ 		font-size: 2rem;
+	}
+
+	p {
+		padding-top: 10px;
+	 	padding-bottom: 2px;
+	}
+	.user-movies {
+		height: 30rem;
+		white-space: nowrap;
+		padding-bottom: 3rem;
+		overflow: auto;
+		overflow-x:scroll; 
+		overflow-y:hidden;
+	}
+
+	.movie-posters {
+		height: 303px;
+		width: 200px;
+		display: inline-block;
+		margin-left: 5px;
+	}
+	
+	.search-label {
+		font-size: 2rem;
+	}
+
+	.search-barForm {
+		color: black;
+    width: 20em;
+    height: 2.5em;
+	}
+
+	.search-button {
+		font-size: 10px
+	}
+
+	.search-image {
+		height: 350px;
+		width: 200px;
+	}
+
+	button {
+		font-size: 10px;
+		display: inline-block;
+		padding: 5px;
+		margin-left: 5px
+	}
+}
+
+
+
+
+
+
+

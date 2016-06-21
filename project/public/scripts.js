@@ -200,7 +200,7 @@ var KingComponent = React.createClass({
 		} else {
 			return(
 				<div>
-					<h1>My fwak is dirty!</h1>
+					<h1>3 Fwauks Movies</h1>
 					<FwakingLogin 
 						loginCheck={this.state.authUser} 
 						onChange={this.changeLogin} />
@@ -257,15 +257,15 @@ var FwakingLogin = React.createClass({
 		return(
 			<div className="login-form" >
         <h3>Please Login</h3>
-        <form onSubmit={this.handleSubmit}>
+        <form className="log" onSubmit={this.handleSubmit}>
           <label htmlFor="username">Username</label>
           <input className="username-login-form" type="text" placeholder="username" 
           onChange={this.handleLoginFormChange.bind(this, 'username')}/>
           <br/>
           <label htmlFor="password">Password</label>
-          <input className="password-login-form" type="text" placeholder="password" onChange={this.handleLoginFormChange.bind(this, 'password')}/>
+          <input className="password-login-form" type="password" placeholder="password" onChange={this.handleLoginFormChange.bind(this, 'password')}/>
           <br/>
-          <input type="submit"/>
+          <input className="login-form-submit" type="submit"/>
         </form>
     </div>
 		);
@@ -312,7 +312,7 @@ var FwakingSignUp = React.createClass({
 		return(
 			<div className="signup-form" >
 				<h3>SignUp Fam!</h3>
-				<form onSubmit={this.handleSubmit}>
+				<form className="log" onSubmit={this.handleSubmit}>
 					<label htmlFor="username">Username</label>
 					<input 
 						className="username-signup-form" 
@@ -374,11 +374,12 @@ var ShowUser = React.createClass({
 			console.log("this is selfie", selfie);
 			var posters = movies.map(function(movie){
 				console.log(movie);
-			return <div><img src={movie.poster} id={movie._id} onClick={selfie.handleClick}/></div>
+			return <div className="movie-posters"><img src={movie.poster} id={movie._id} onClick={selfie.handleClick}/></div>
 		});
 			//console.log("this is movie title", movies[0].title);
 			return(
 				<div>
+<<<<<<< HEAD
 					<h1>Welcome {this.props.name}</h1>
 					<h1>{this.props.name}lishous</h1>
 					<h1>{this.props.name}rooney</h1>
@@ -386,6 +387,14 @@ var ShowUser = React.createClass({
 	        <h1>these are your fwauking movies bitch:</h1>
 	        {posters}
 	        <button onClick={selfie.handleLogoutClick} >logout</button>
+=======
+					<h1 className="welcome-user">Welcome {this.props.name}</h1>
+					<p className="aka">{this.props.name}Licious...</p>
+					<p className="aka">{this.props.name}Rooney...</p>
+					<p className="aka">{this.props.name}Batootie...</p>
+	        <p className="wanted-movies">Check out my fwauking movies baaatch:</p>
+	        <div className="user-movies">{posters}</div>
+>>>>>>> a3bdf9f8426f97e44d852080580fa417b4287c7c
 		    </div>
 	    );
 		} else {
@@ -431,8 +440,8 @@ var FwaukingSearchBar = React.createClass({
 		return(
 			<div className="searchForm" >
 			<form onSubmit={this.handleSubmit}>
-				<label htmlFor="search">Search some Fwauking movie</label>
-				<br />
+				<label className="search-label" htmlFor="search">Search some Fwauking movie</label>
+				<br/>
 				<input 
 					className="search-barForm" 
 					type="text" 
@@ -441,7 +450,7 @@ var FwaukingSearchBar = React.createClass({
 					ref="textInput"
         	onChange={this.handleSearchChange}
         />
-				<button>fwauking button</button>
+				<button className="search-button">fwauking button</button>
 			</form>
 			</div>
 		)
@@ -483,10 +492,9 @@ var ShowSearch = React.createClass({
 			//console.log("these be the props yall >: ", this.props.searchData);
 			return(
 				<div>
-					<p>hello person</p>
-					<h1>{this.props.searchData.Title}</h1>
-					<img src={this.props.searchData.Poster} />
-					<p>{this.props.searchData.Plot}</p>
+					<h1 className="search-result-title">{this.props.searchData.Title}</h1>
+					<img src={this.props.searchData.Poster} className="search-image" />
+					<p className="search-movie-info">{this.props.searchData.Plot}</p>
 					<button onClick={this.handleClick}>fork this movie</button>	
 					<button onClick={this.goBack}>Go back to your User Page!</button>
 				</div>
@@ -509,6 +517,7 @@ var MovieDisplay = React.createClass({
 		console.log(this.props.currentMovieWatched);
 			return (
 			<div>
+
 			<p>This is movie display</p>
 			<img src={this.props.currentMoviePoster}/>
 			<p>Title: {this.props.currentMovieTitle}</p>
@@ -516,6 +525,8 @@ var MovieDisplay = React.createClass({
 			<p>Rating: {this.props.currentMovieRating}</p>
 			<p>Watched: {this.props.currentMovieWatched}</p>
 			<button onClick={this.handleClick}>Back to User Page</button>
+
+			
 			</div>
 			)
 	}
