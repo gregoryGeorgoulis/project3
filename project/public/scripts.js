@@ -129,7 +129,7 @@ var KingComponent = React.createClass({
 					currentMoviePoster: response1.poster,
 					currentMovieImdbId: response1.imdbID,
 					currentMovieRating: response1.rating,
-					currentMovieWatched: response1.watched
+					currentMovieWatched: response1.watched.toString()
 				})
 				this.changeShowMovie();
 			}.bind(this)
@@ -443,7 +443,7 @@ var ShowSearch = React.createClass({
 		title:this.props.searchData.Title,
 		poster:this.props.searchData.Poster,
 		description:this.props.searchData.Plot,
-		watch: false,
+		watched: false,
 		rating: "",
 	}
 		$.ajax({
@@ -498,7 +498,6 @@ var MovieDisplay = React.createClass({
 			<img src={this.props.currentMoviePoster}/>
 			<p>Title: {this.props.currentMovieTitle}</p>
 			<p>Description: {this.props.currentMovieDescription}</p>
-			<p>IMDb ID: {this.props.currentMovieImdbId}</p>
 			<p>Rating: {this.props.currentMovieRating}</p>
 			<p>Watched: {this.props.currentMovieWatched}</p>
 			<button onClick={this.handleClick}>Back to User Page</button>
