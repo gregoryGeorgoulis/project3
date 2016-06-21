@@ -379,22 +379,14 @@ var ShowUser = React.createClass({
 			//console.log("this is movie title", movies[0].title);
 			return(
 				<div>
-<<<<<<< HEAD
-					<h1>Welcome {this.props.name}</h1>
-					<h1>{this.props.name}lishous</h1>
-					<h1>{this.props.name}rooney</h1>
-					<h1>{this.props.name}batootie</h1>
-	        <h1>these are your fwauking movies bitch:</h1>
-	        {posters}
-	        <button onClick={selfie.handleLogoutClick} >logout</button>
-=======
+
 					<h1 className="welcome-user">Welcome {this.props.name}</h1>
 					<p className="aka">{this.props.name}Licious...</p>
 					<p className="aka">{this.props.name}Rooney...</p>
 					<p className="aka">{this.props.name}Batootie...</p>
 	        <p className="wanted-movies">Check out my fwauking movies baaatch:</p>
 	        <div className="user-movies">{posters}</div>
->>>>>>> a3bdf9f8426f97e44d852080580fa417b4287c7c
+	        <button onClick={selfie.handleLogoutClick} >logout</button>
 		    </div>
 	    );
 		} else {
