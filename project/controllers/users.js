@@ -113,14 +113,22 @@ router.put('/:id/newmovie/', function(req,res){
 
 ///Delete Movie
 router.delete('/:id/delete/:movie_id', function(req,res){
-	User.findBy(req.params.id).then(function(user){
-		user.movies.forEach(function(movie){
-			var index = user.movies.indexOf(movie);
-			user.movies.splice(index,1);
-			user.save();
-		});
+	console.log('are we deleting?');
+	User.findById(req.params.id).then(function(user){
+		console.log('this is user:');
+		console.log(user);
+		for (i = 0; i < user.movies.length; i++) {
+			console.log('deleting almost happening...');
+			console.log(req.params.movie_id);
+			console.log(user.movies[i]._id);
+				if (user.movies[i]._id == req.params.movie_id) {
+				console.log('almost almost happening');
+				var index = user.movies.indexOf(user.movies[i]);
+				user.movies.splice(index,1);
+				user.save();
+			}	
+		}		
 	});
-	Movie.findByIdAndRemove(req.params.movie_id);
 });
 
 module.exports = router;
