@@ -362,7 +362,7 @@ var FwaukingSearchBar = React.createClass({
 	}, 
 	omdbAjax: function(searchText) {
 		$.ajax({
-			url:"http://www.omdbapi.com/?t=" + searchText,
+			url:"https://www.omdbapi.com/?t=" + searchText,
 			method:"GET",
 			success: function(data) {
 				console.log("===> This is the data type of results below: ", typeof data);
