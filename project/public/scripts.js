@@ -213,9 +213,9 @@ var FwakingLogin = React.createClass({
           onChange={this.handleLoginFormChange.bind(this, 'username')}/>
           <br/>
           <label htmlFor="password">Password</label>
-          <input className="password-login-form" type="text" placeholder="password" onChange={this.handleLoginFormChange.bind(this, 'password')}/>
+          <input className="password-login-form" type="password" placeholder="password" onChange={this.handleLoginFormChange.bind(this, 'password')}/>
           <br/>
-          <input type="submit"/>
+          <input className="login-form-submit" type="submit"/>
         </form>
     </div>
 		);

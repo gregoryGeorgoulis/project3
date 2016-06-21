@@ -2,4 +2,21 @@ body {
 	background-color: #00203F;
 	font-family: 'Rock Salt', cursive;
 	color: white;
+	font-size: 30px;
+}
+
+h1 {
+
+}
+
+.login-form, .signup-form {
+	font-size: 10px;
+}
+
+.login-form-submit, .signup-form-submit {
+	background-color: #5C1223;
+}
+
+.username-login-form, .password-login-form, .username-signup-form, .password-signup-form {
+	color: black;
 }
