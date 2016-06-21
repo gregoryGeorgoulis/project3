@@ -71,6 +71,16 @@ router.delete('/:id', function(req,res){
 	});
 });
 
+///Get Movie Data
+router.get('/:movie_id', function(req,res){
+	Movie.findById(req.params.movie_id, function(err,movie){
+		if (err) {
+			console.log(err);
+		}
+		res.json(movie);
+	})
+})
+
 ///Create Movie
 router.put('/:id/newmovie/', function(req,res){
 	console.log(req.body);
@@ -107,4 +117,5 @@ router.delete('/:id/delete/:movie_id', function(req,res){
 	});
 	Movie.findByIdAndRemove(req.params.movie_id);
 });
+
 module.exports = router;

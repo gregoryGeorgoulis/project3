@@ -17,7 +17,10 @@ var KingComponent = React.createClass({
 			movies:[],
 			search:"",
 			searchMovie: [],
-			display: 'user'
+			display: 'user',
+			showMovie: 'no',
+			currentMovie: '',
+			currentMovieInfo: {}
 		};
 	},
 	changeLogin: function(){//state is set to the cookies of username and id
@@ -47,14 +50,21 @@ var KingComponent = React.createClass({
 			this.setState({display: 'user'});
 		}
 	},
-	changeToMovieInfoDisplay: function(){
-        console.log("change to movie info display is working");
-        if (this.state.display === 'user'){
-            this.setState({display: 'movieInfo'});
-        } else {
-            this.setState({display: 'user'});
-        }
-    },
+
+	changeShowMovie: function(){
+		console.log('changeShowMovie is working');
+		if (this.state.showMovie === 'yes') {
+			this.setState({showMovie: 'no'});
+		} else {
+			this.showAjax();
+			this.setState({showMovie: 'yes'});
+		}
+	},
+	changeCurrentMovie: function(movieId){
+		this.setState({currentMovie: movieId});
+		this.movieAjax();
+	},
+
 	// getFwakingData: function(movies) {//This method gets our data and sets the state of 
 	// 	// console.log('hey you fuck');
 	// 	// console.log("fuck you and ur fat cunt" ,movies.movies[1].title);
@@ -87,14 +97,19 @@ var KingComponent = React.createClass({
       }.bind(this)
 		})
 	},
+	movieAjax: function(){
+		$.ajax({
+			url: '/users/'+this.state.currentMovie,
+			type: 'GET',
+			success: function(response){
+				console.log(response);
+				this.setState({currentMovieInfo: response})
+			}.bind(this)
+		})
+	},
 	render: function(){
-		// console.log("====> authUser state: ", this.state.authUser);
-		// console.log("====> state of username: ", this.state.username);
-		// console.log("====> state of id: ", this.state.id);
-		// console.log("====> state of movies: ", this.state.movies);
-		// console.log("===> checking shit out bros", this.state.movies);
 		if(this.state.authUser === true){
-			if(this.state.display === 'user'){
+			if (this.state.display === 'user' && this.state.showMovie === 'no'){
 			return(
 				<div>
 				<FwaukingSearchBar 
@@ -108,23 +123,30 @@ var KingComponent = React.createClass({
 						movies={this.state.movies} 
 						name={this.state.username} 
 						text={this.state.search}
+						changeShowMovie={this.changeShowMovie}
+						changeCurrentMovie={this.changeCurrentMovie}
 					 />
 				</div>
 			)
-			}else if (this.state.display === 'movieInfo') {
-				<div>how, YOU doing ;)</div>
 
-			}
-			{
+			} else if (this.state.display === 'search'){
 				return(
 					<ShowSearch
 						display={this.state.display}
 						searchData={this.state.searchMovie}
 						changeDisplay={this.changeDisplay}
+						changeShowMovie={this.changeShowMovie}
 					/>
 				)
-		}
 
+			} else if (this.state.display === 'user' && this.state.showMovie === 'yes') {
+				console.log('I need help displaying');
+				return(
+					<MovieDisplay
+					changeShowMovie={this.changeShowMovie}
+					currentMovie={this.state.currentMovie}/>
+				)
+			}
 		} else {
 			return(
 				<div>
@@ -136,6 +158,7 @@ var KingComponent = React.createClass({
 				</div>
 			);
 		}
+
 	}
 });
 
@@ -265,10 +288,16 @@ var FwakingSignUp = React.createClass({
 
 
 var ShowUser = React.createClass({
-	   handleClick: function(){
-        console.log("Clicking and Clicking! Yeaaaahhh")
-        this.props.movieInfo();
-    },
+	handleClick: function(e){
+		console.log("This is e.target: ", e.target);
+		console.log(typeof e.target);
+		console.log(e.target.src);
+		console.log(e.target.id);
+		this.props.changeCurrentMovie(e.target.id);
+		// var thisMovie = ;
+		e.preventDefault();
+		this.props.changeShowMovie();
+	},
 	render: function() {
 		// console.log("props ==>", this.props.posters);
 
@@ -288,8 +317,11 @@ var ShowUser = React.createClass({
 
 		if (movies.length > 0) {
 			var selfie = this;
+
+			console.log("this is selfie", selfie);
 			var posters = movies.map(function(movie){
-			return <img src={movie.poster} onClick={selfie.handleClick}/>
+				console.log(movie);
+			return <div><img src={movie.poster} id={movie._id} onClick={selfie.handleClick}/></div>
 		});
 			console.log("this is movie title", movies[0].title);
 			return(
@@ -410,6 +442,22 @@ var ShowSearch = React.createClass({
 				<h1>you fwauked the search up</h1>
 			)
 		}
+	}
+})
+
+var MovieDisplay = React.createClass({
+	handleClick: function(e){
+		e.preventDefault();
+		this.props.changeShowMovie();
+	},
+	render: function(){
+		return(
+			<div>
+			<p>This is movie display</p>
+			<p>{this.props.currentMovie}</p>
+			<button onClick={this.handleClick}>Back to User Page</button>
+			</div>
+		)
 	}
 })
 
