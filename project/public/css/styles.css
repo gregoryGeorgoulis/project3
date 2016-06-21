@@ -3,6 +3,7 @@ body {
 	font-family: 'Rock Salt', cursive;
 	color: white;
 	font-size: 30px;
+	text-align: center;
 }
 
 h1 {
@@ -19,4 +20,12 @@ h1 {
 
 .username-login-form, .password-login-form, .username-signup-form, .password-signup-form {
 	color: black;
+}
+
+.movie-posters {
+	
+}
+
+.wanted-movies {
+
 }

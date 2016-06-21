@@ -321,16 +321,14 @@ var ShowUser = React.createClass({
 			console.log("this is selfie", selfie);
 			var posters = movies.map(function(movie){
 				console.log(movie);
-			return <div><img src={movie.poster} id={movie._id} onClick={selfie.handleClick}/></div>
+			return <div className="movie-posters"><img src={movie.poster} id={movie._id} onClick={selfie.handleClick}/></div>
 		});
 			console.log("this is movie title", movies[0].title);
 			return(
 				<div>
 					<h1>Welcome {this.props.name}</h1>
-					<h1>{this.props.name}lishous</h1>
-					<h1>{this.props.name}rooney</h1>
-					<h1>{this.props.name}batootie</h1>
-	        <h1>these are your fwauking movies bitch:</h1>
+					<br>
+	        <p className="wanted-movies">Check out my fwauking movies baaatch:</p>
 	        {posters}
 		    </div>
 	    );
