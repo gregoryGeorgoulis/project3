@@ -429,7 +429,7 @@ var ShowSearch = React.createClass({
 					<p>hello person</p>
 					<h1>{this.props.searchData.Title}</h1>
 					<img src={this.props.searchData.Poster} className="search-image" />
-					<p>{this.props.searchData.Plot}</p>
+					<p className="search-movie-info">{this.props.searchData.Plot}</p>
 					<button onClick={this.handleClick}>fork this movie</button>	
 					<button onClick={this.goBack}>Go back to your User Page!</button>
 				</div>

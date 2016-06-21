@@ -6,6 +6,10 @@ body {
 	text-align: center;
 }
 
+div {
+	display: inline-block;
+}
+
 h1 {
 	font-size: 30px;
 
@@ -14,11 +18,11 @@ h1 {
 label {
 	font-size: 10px;
 }
-.login-form, .signup-form, .search-barForm {
+.login-form, .signup-form, .search-barForm, button {
 	font-size: 10px;
 }
 
-.login-form-submit, .signup-form-submit, .search-button {
+.login-form-submit, .signup-form-submit, .search-button, button {
 	background-color: #5C1223;
 
 }
@@ -35,18 +39,20 @@ label {
 	font-size: 5px;
 }
 
-.wanted-movies {
+.wanted-movies, .search-movie-info {
  font-size: 10px;
 }
 
 .movie-posters {
-	height: 75px;
-	width: 75px;
+	height: 120px;
+	width: 100px;
 	display: inline-block;
+	margin-left: 5px;
 }
 
 img {
 	width: 100%;
+	height: 100%;
 }
 
 /*Search Display*/
@@ -54,4 +60,11 @@ img {
 .search-image {
 	height: 250px;
 	width: 200px;
+}
+
+button {
+	font-size: 10px;
+	display: inline-block;
+	padding: 5px;
+	margin-left: 5px
 }
