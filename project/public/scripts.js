@@ -1,7 +1,6 @@
 // ==========================
 // KING COMPONENT
 // ==========================
-
 var KingComponent = React.createClass({
 	getInitialState: function(){//initial state of user logged in
 		var userCheck;
@@ -20,7 +19,13 @@ var KingComponent = React.createClass({
 			display: 'user',
 			showMovie: 'no',
 			currentMovie: '',
-			currentMovieInfo: {}
+			currentMovieInfo: {},
+			currentMovieTitle: '',
+			currentMovieDescription: '',
+			currentMoviePoster: '',
+			currentMovieImdbId: '',
+			currentMovieWatched: '',
+			currentMovieRating: ''
 		};
 	},
 	changeLogin: function(){//state is set to the cookies of username and id
@@ -61,8 +66,12 @@ var KingComponent = React.createClass({
 		}
 	},
 	changeCurrentMovie: function(movieId){
+		this.showAjax();
+		console.log('changing current movie');
+		console.log('movieId:', movieId);
 		this.setState({currentMovie: movieId});
-		this.movieAjax();
+		console.log('now this.state.currentMovie:');
+		console.log(this.state.currentMovie);
 	},
 	changeLogout: function() {
 		Cookies.remove("jwt_token");
@@ -98,6 +107,8 @@ var KingComponent = React.createClass({
 					 movie
 					);
 				})
+				console.log('-----------------------------------------------------');
+				console.log('the moviesARray', moviesArray);
 				this.setState({movies: moviesArray});
 				console.log('testing showajax');
 			// 	 this.getFwakingData(daMovies);//we then invoke getFwakingData(which sets the state of movies) with our new data.
@@ -107,17 +118,36 @@ var KingComponent = React.createClass({
       }.bind(this)
 		})
 	},
-	movieAjax: function(){
+	movieAjax: function(thisMovieId){
+		console.log('this is the current movie id:', this.state);
 		$.ajax({
-			url: '/users/'+this.state.currentMovie,
+			url: '/users/movies/'+Cookies('id') +'/'+ thisMovieId,
 			type: 'GET',
 			success: function(response){
-				console.log(response);
-				this.setState({currentMovieInfo: response})
+				console.log('success!');
+				var response1
+				for (var i = 0; i < response.length; i++){
+					if (response[i]._id === thisMovieId) {
+						console.log(response[i]);
+						response1 = response[i];
+					}
+				}
+				console.log("poster is",response1.poster);
+				this.setState({currentMovieInfo: response1,
+					currentMovieTitle: response1.title,
+					currentMovieDescription: response1.description,
+					currentMoviePoster: response1.poster,
+					currentMovieImdbId: response1.imdbID,
+					currentMovieRating: response1.rating,
+					currentMovieWatched: response1.watched.toString()
+				})
+				this.changeShowMovie();
 			}.bind(this)
 		})
 	},
 	render: function(){
+		console.log('rendering.');
+		console.log('this.state.currentMovie', this.state.currentMovie);
 		if(this.state.authUser === true){
 			if (this.state.display === 'user' && this.state.showMovie === 'no'){
 			return(
@@ -136,7 +166,8 @@ var KingComponent = React.createClass({
 						changeShowMovie={this.changeShowMovie}
 						changeCurrentMovie={this.changeCurrentMovie}
 						logout={this.changeLogout}
-					 />
+						movieAjax={this.movieAjax}
+						/>
 				</div>
 			)
 
@@ -154,8 +185,16 @@ var KingComponent = React.createClass({
 				console.log('I need help displaying');
 				return(
 					<MovieDisplay
+					movieAjax={this.movieAjax}
 					changeShowMovie={this.changeShowMovie}
-					currentMovie={this.state.currentMovie}/>
+					currentMovie={this.state.currentMovie}
+					currentMovieInfo={this.state.currentMovieInfo}
+					currentMovieTitle={this.state.currentMovieTitle}
+					currentMovieDescription={this.state.currentMovieDescription}
+					currentMoviePoster={this.state.currentMoviePoster}
+					currentMovieWatched={this.state.currentMovieWatched}
+					currentMovieRating={this.state.currentMovieRating}
+					currentMovieImdbId={this.state.currentMovieImdbId}/>
 				)
 			}
 		} else {
@@ -305,9 +344,9 @@ var ShowUser = React.createClass({
 		console.log(e.target.src);
 		console.log(e.target.id);
 		this.props.changeCurrentMovie(e.target.id);
+		this.props.movieAjax(e.target.id);
 		// var thisMovie = ;
 		e.preventDefault();
-		this.props.changeShowMovie();
 	},
 	handleLogoutClick: function(e) {
 		this.props.logout();
@@ -337,7 +376,7 @@ var ShowUser = React.createClass({
 				console.log(movie);
 			return <div><img src={movie.poster} id={movie._id} onClick={selfie.handleClick}/></div>
 		});
-			console.log("this is movie title", movies[0].title);
+			//console.log("this is movie title", movies[0].title);
 			return(
 				<div>
 					<h1>Welcome {this.props.name}</h1>
@@ -362,16 +401,16 @@ var ShowUser = React.createClass({
 
 var FwaukingSearchBar = React.createClass({
 	handleSearchChange: function(e) {
-		console.log(e.target.value);
+		// console.log(e.target.value);
 		this.props.onSearchInput(
 			this.refs.textInput.value
 		);
 	},
 	handleSubmit: function(e) {
 		e.preventDefault();
-		console.log(this.state);
+		// console.log(this.state);
 		var searchText = this.props.text.trim();
-		console.log(searchText);
+		// console.log(searchText);
 		this.omdbAjax(searchText);
 		this.props.changeDisplay();
 	}, 
@@ -380,8 +419,8 @@ var FwaukingSearchBar = React.createClass({
 			url:"http://www.omdbapi.com/?t=" + searchText,
 			method:"GET",
 			success: function(data) {
-				console.log("===> This is the data type of results below: ", typeof data);
-				console.log(data);
+				// console.log("===> This is the data type of results below: ", typeof data);
+				// console.log(data);
 				this.props.onChange(data);
 
 			}.bind(this)
@@ -419,7 +458,7 @@ var ShowSearch = React.createClass({
 		title:this.props.searchData.Title,
 		poster:this.props.searchData.Poster,
 		description:this.props.searchData.Plot,
-		watch: false,
+		watched: false,
 		rating: "",
 	}
 		$.ajax({
@@ -427,7 +466,7 @@ var ShowSearch = React.createClass({
 			method:"PUT",
 			data: movieData,
 			success: function(data) {
-				console.log("this is the data from ajax movie stuff",data);
+				//console.log("this is the data from ajax movie stuff",data);
 				this.props.changeDisplay();
 			}.bind(this)
 		})
@@ -441,7 +480,7 @@ var ShowSearch = React.createClass({
 
 
 			if (this.props != null) {
-			console.log("these be the props yall >: ", this.props.searchData);
+			//console.log("these be the props yall >: ", this.props.searchData);
 			return(
 				<div>
 					<p>hello person</p>
@@ -466,13 +505,19 @@ var MovieDisplay = React.createClass({
 		this.props.changeShowMovie();
 	},
 	render: function(){
-		return(
+		console.log("these are the props:", this.props.currentMovieWatched);
+		console.log(this.props.currentMovieWatched);
+			return (
 			<div>
 			<p>This is movie display</p>
-			<p>{this.props.currentMovie}</p>
+			<img src={this.props.currentMoviePoster}/>
+			<p>Title: {this.props.currentMovieTitle}</p>
+			<p>Description: {this.props.currentMovieDescription}</p>
+			<p>Rating: {this.props.currentMovieRating}</p>
+			<p>Watched: {this.props.currentMovieWatched}</p>
 			<button onClick={this.handleClick}>Back to User Page</button>
 			</div>
-		)
+			)
 	}
 })
 
