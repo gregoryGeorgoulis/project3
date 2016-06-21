@@ -195,7 +195,8 @@ var KingComponent = React.createClass({
 					currentMoviePoster={this.state.currentMoviePoster}
 					currentMovieWatched={this.state.currentMovieWatched}
 					currentMovieRating={this.state.currentMovieRating}
-					currentMovieImdbId={this.state.currentMovieImdbId}/>
+					currentMovieImdbId={this.state.currentMovieImdbId}
+					showAjax={this.showAjax}/>
 				)
 			}
 		} else {
@@ -538,6 +539,26 @@ var ShowSearch = React.createClass({
 })
 
 var MovieDisplay = React.createClass({
+	deleteMovie: function(e){
+		e.preventDefault();
+		console.log(this.props.currentMovie);
+		console.log(Cookies('id'));
+		this.deleteMovieAjax();
+		this.props.showAjax();
+		this.props.changeShowMovie();
+	},
+	deleteMovieAjax: function(e) {
+		$.ajax({
+			url: '/users/'+Cookies("id")+'/delete/'+this.props.currentMovie,
+			type: 'DELETE',
+			success: function(){
+				console.log('deleted');
+			}
+		}).done();
+	},
+	handleSubmit: function(e){
+		e.preventDefault();
+	},
 	handleClick: function(e){
 		e.preventDefault();
 		this.props.changeShowMovie();
@@ -555,12 +576,11 @@ var MovieDisplay = React.createClass({
 			<p>Rating: {this.props.currentMovieRating}</p>
 			<p>Watched: {this.props.currentMovieWatched}</p>
 			<button onClick={this.handleClick}>Back to User Page</button>
-
-			
+			<button onClick={this.deleteMovie}>Delete</button>
 			</div>
 			)
 	}
-})
+});
 
 // ==========================
 //  REACT DOM

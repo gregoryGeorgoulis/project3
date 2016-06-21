@@ -7,8 +7,8 @@ var jwt = require('jsonwebtoken');
 router.use(passport.initialize());
 //this is the route that needs to be hit to run auth
 router.post('/', passport.authenticate('local', { session: false }), function(req, res, next) {
-	console.log('vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv');
-	console.log(req.user.username + ' has logged in');
+	// console.log('vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv');
+	// console.log(req.user.username + ' has logged in');
 	
 
 	//thid is the jwt token being set to a cookie
