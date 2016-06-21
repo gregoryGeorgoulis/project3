@@ -22,15 +22,21 @@ h1 {
 
 .welcome-user, .search-result-title {
 	font-size: 26px;
-	padding: 13px;
+	padding: 0px;
 }
+.aka {
+	font-size: 10px;
+	display: inline-block;
+	margin-left: 10px;
+}
+
 label {
 	font-size: 10px;
 }
 
 p {
 	padding-top: 1em;
- 	padding-bottom: 2em;
+ 	padding-bottom: 1em;
 }
 
 .login-form, .signup-form, .search-barForm, .movie-display-button, button {
@@ -85,6 +91,10 @@ img {
 }
 /*Search Display*/
 
+.search-result-title {
+	padding-top: 30px;
+}
+
 .search-image {
 	height: 250px;
 	width: 200px;
@@ -97,13 +107,22 @@ button {
 	margin-left: 5px
 }
 
-@media(max-width: 721px) {
+@media(min-width: 521px) {
 
-	.welcome-user, .search-result-title {
+	.welcome-user{
+		font-size: 1.5em;
+		padding: 0px;
+	} 
+	.search-result-title {
 	font-size: 1.5em;
 	padding: 13px;
 	}
-
+	.aka {
+		font-size: 20px;
+		display: inline-block;
+		margin-left: 10px;
+		padding: 18px;
+	}
 	.wanted-movies, .search-movie-info {
  		font-size: 2rem;
 	}
@@ -127,11 +146,37 @@ button {
 		display: inline-block;
 		margin-left: 5px;
 	}
+	
+	.search-label {
+		font-size: 2rem;
+	}
 
+	.search-barForm {
+		color: black;
+    width: 20em;
+    height: 2.5em;
+	}
 
+	.search-button {
+		font-size: 10px
+	}
 
+	.search-image {
+		height: 350px;
+		width: 200px;
+	}
 
-
-
-
+	button {
+		font-size: 10px;
+		display: inline-block;
+		padding: 5px;
+		margin-left: 5px
+	}
 }
+
+
+
+
+
+
+

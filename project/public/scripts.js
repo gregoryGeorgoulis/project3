@@ -327,6 +327,9 @@ var ShowUser = React.createClass({
 			return(
 				<div>
 					<h1 className="welcome-user">Welcome {this.props.name}</h1>
+					<p className="aka">{this.props.name}Licious...</p>
+					<p className="aka">{this.props.name}Rooney...</p>
+					<p className="aka">{this.props.name}Batootie...</p>
 	        <p className="wanted-movies">Check out my fwauking movies baaatch:</p>
 	        <div className="user-movies">{posters}</div>
 		    </div>
