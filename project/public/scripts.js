@@ -166,6 +166,7 @@ var KingComponent = React.createClass({
 						changeShowMovie={this.changeShowMovie}
 						changeCurrentMovie={this.changeCurrentMovie}
 						logout={this.changeLogout}
+						delete={this.changeLogout}
 						movieAjax={this.movieAjax}
 						/>
 				</div>
@@ -370,6 +371,22 @@ var ShowUser = React.createClass({
 	handleLogoutClick: function(e) {
 		this.props.logout();
 	},
+	handleDeleteClick: function(e) {
+		console.log('delete was clicked');
+		console.log(Cookies("id"));
+		this.deleteAjax(Cookies("id"));
+		this.props.logout();
+	},
+	deleteAjax: function(id) {
+		$.ajax({
+			url:"/users/" + id,
+			method:"DELETE",
+			success: function() {
+				console.log('hello delete ajax is hit');
+				this.props.logout();
+			}.bind(this)
+		})
+	},
 	render: function() {
 		// console.log("props ==>", this.props.posters);
 
@@ -406,6 +423,8 @@ var ShowUser = React.createClass({
 	        <p className="wanted-movies">Check out my fwauking movies baaatch:</p>
 	        <div className="user-movies">{posters}</div>
 	        <button onClick={selfie.handleLogoutClick} >logout</button>
+	        <br />
+	        <button onClick={selfie.handleDeleteClick}>Delete user</button>
 		    </div>
 	    );
 		} else {
