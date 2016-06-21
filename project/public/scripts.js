@@ -400,6 +400,7 @@ var ShowUser = React.createClass({
 				<div>
 
 					<h1 className="welcome-user">Welcome {this.props.name}</h1>
+					<p className="aka1">a.k.a</p>
 					<p className="aka">{this.props.name}Licious...</p>
 					<p className="aka">{this.props.name}Rooney...</p>
 					<p className="aka">{this.props.name}Batootie...</p>
@@ -526,20 +527,17 @@ var MovieDisplay = React.createClass({
 	render: function(){
 		console.log("these are the props:", this.props.currentMovieWatched);
 		console.log(this.props.currentMovieWatched);
-			return (
-			<div>
-
-			<p>This is movie display</p>
-			<img src={this.props.currentMoviePoster}/>
-			<p>Title: {this.props.currentMovieTitle}</p>
-			<p>Description: {this.props.currentMovieDescription}</p>
-			<p>Rating: {this.props.currentMovieRating}</p>
-			<p>Watched: {this.props.currentMovieWatched}</p>
-			<button onClick={this.handleClick}>Back to User Page</button>
-
-			
+		return (
+			<div id="movie-display-container">
+				<p className="movie-display-header"> Movie Info</p>
+				<img src={this.props.currentMoviePoster} className="search-image"/>
+				<p className="movie-display-title">Title: {this.props.currentMovieTitle}</p>
+				<p className="movie-display">Description: {this.props.currentMovieDescription}</p>
+				<p className="movie-display">Rating: {this.props.currentMovieRating}</p>
+				<p className="movie-display">Watched: {this.props.currentMovieWatched}</p>
+				<button onClick={this.handleClick}>Back to User Page</button>
 			</div>
-			)
+		)
 	}
 })
 
