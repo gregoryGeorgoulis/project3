@@ -48,3 +48,10 @@ label {
 img {
 	width: 100%;
 }
+
+/*Search Display*/
+
+.search-image {
+	height: 250px;
+	width: 200px;
+}
