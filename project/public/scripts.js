@@ -204,7 +204,7 @@ var KingComponent = React.createClass({
 					<FwakingLogin 
 						loginCheck={this.state.authUser} 
 						onChange={this.changeLogin} />
-					<FwakingSignUp />
+					<FwakingSignUp onChange={this.changeLogin}/>
 				</div>
 			);
 		}
@@ -295,6 +295,24 @@ var FwakingSignUp = React.createClass({
 		var password = this.state.password.trim();
 		this.signUpAJAX(username, password);
 	},
+	loginAJAX2: function(username, password){
+		$.ajax({
+			url: "/auth",
+			method: "POST", 
+			data: {
+				username: username, 
+				password: password
+			},
+
+			success: function(data){
+				// console.log("===>This is loginAJAX success data: ", data);
+				Cookies.set("jwt_token", data.token);
+				Cookies.set("username", data.username);
+				Cookies.set("id", data.id);
+				this.props.onChange(data.token)
+			}.bind(this)
+		});
+	},
 	signUpAJAX: function(username, password){
 		$.ajax({
 			url: "/users",
@@ -304,6 +322,7 @@ var FwakingSignUp = React.createClass({
 				password: password,
 			},
 			success: function(data){
+				this.loginAJAX2(username, password);
 				// console.log("===>This is signUpAJAX success data: ", data);
 			}.bind(this)
 		});
