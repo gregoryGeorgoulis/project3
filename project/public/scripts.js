@@ -17,7 +17,8 @@ var KingComponent = React.createClass({
 			movies:[],
 			search:"",
 			searchMovie: [],
-			display: 'user'
+			display: 'user',
+			showMovie: 'no'
 		};
 	},
 	changeLogin: function(){//state is set to the cookies of username and id
@@ -45,6 +46,14 @@ var KingComponent = React.createClass({
 		} else {
 			this.showAjax();
 			this.setState({display: 'user'});
+		}
+	},
+	changeShowMovie: function(){
+		console.log('changeShowMovie is working');
+		if (this.state.showMovie === 'yes') {
+			this.setState({showMovie: 'no'});
+		} else {
+			this.setState({showMovie: 'yes'});
 		}
 	},
 	// getFwakingData: function(movies) {//This method gets our data and sets the state of 
@@ -86,7 +95,7 @@ var KingComponent = React.createClass({
 		// console.log("====> state of movies: ", this.state.movies);
 		// console.log("===> checking shit out bros", this.state.movies);
 		if(this.state.authUser === true){
-			if(this.state.display === 'user'){
+			if (this.state.display === 'user' && this.state.showMovie === 'no'){
 			return(
 				<div>
 				<FwaukingSearchBar 
@@ -99,18 +108,25 @@ var KingComponent = React.createClass({
 						movies={this.state.movies} 
 						name={this.state.username} 
 						text={this.state.search}
+						changeShowMovie={this.changeShowMovie}
 					 />
 				</div>
 			)
-			}else {
+			} else if (this.state.display === 'search'){
 				return(
 					<ShowSearch
 						display={this.state.display}
 						searchData={this.state.searchMovie}
 						changeDisplay={this.changeDisplay}
+						changeShowMovie={this.changeShowMovie}
 					/>
 				)
-		}
+			} else if (this.state.display === 'user' && this.state.showMovie === 'yes') {
+				console.log('I need help displaying');
+				return(
+					<MovieDisplay />
+				)
+			}
 		} else {
 			return(
 				<div>
@@ -251,6 +267,10 @@ var FwakingSignUp = React.createClass({
 
 
 var ShowUser = React.createClass({
+	handleClick: function(e){
+		e.preventDefault();
+		this.props.changeShowMovie();
+	},
 	render: function() {
 		// console.log("props ==>", this.props.posters);
 
@@ -269,8 +289,9 @@ var ShowUser = React.createClass({
 
 
 		if (movies.length > 0) {
+			var selfie = this;
 			var posters = movies.map(function(movie){
-			return <img src={movie.poster}/>
+			return <img src={movie.poster} onClick={selfie.handleClick}/>
 		});
 			console.log("this is movie title", movies[0].title);
 			return(
@@ -391,6 +412,14 @@ var ShowSearch = React.createClass({
 				<h1>you fwauked the search up</h1>
 			)
 		}
+	}
+})
+
+var MovieDisplay = React.createClass({
+	render: function(){
+		return(
+			<p>This is movie display</p>
+		)
 	}
 })
 
