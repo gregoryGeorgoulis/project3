@@ -64,6 +64,16 @@ var KingComponent = React.createClass({
 		this.setState({currentMovie: movieId});
 		this.movieAjax();
 	},
+	changeLogout: function() {
+		Cookies.remove("jwt_token");
+		Cookies.remove("username");
+		Cookies.remove("id");
+		this.setState({
+			username: "",
+			authUser: "",
+			id: "",
+		})
+	},
 
 	// getFwakingData: function(movies) {//This method gets our data and sets the state of 
 	// 	// console.log('hey you fuck');
@@ -125,6 +135,7 @@ var KingComponent = React.createClass({
 						text={this.state.search}
 						changeShowMovie={this.changeShowMovie}
 						changeCurrentMovie={this.changeCurrentMovie}
+						logout={this.changeLogout}
 					 />
 				</div>
 			)
@@ -298,6 +309,9 @@ var ShowUser = React.createClass({
 		e.preventDefault();
 		this.props.changeShowMovie();
 	},
+	handleLogoutClick: function(e) {
+		this.props.logout();
+	},
 	render: function() {
 		// console.log("props ==>", this.props.posters);
 
@@ -332,6 +346,7 @@ var ShowUser = React.createClass({
 					<h1>{this.props.name}batootie</h1>
 	        <h1>these are your fwauking movies bitch:</h1>
 	        {posters}
+	        <button onClick={selfie.handleLogoutClick} >logout</button>
 		    </div>
 	    );
 		} else {
