@@ -219,7 +219,7 @@ var FwakingLogin = React.createClass({
 	},
 	handleLoginFormChange: function(stateName, e){
 		var change = {};
-		console.log(e.target.value);
+		// console.log(e.target.value);
 		// console.log("===> This is stateName: ", stateName);
 		change[stateName] = e.target.value;
 		this.setState(change);//sets state to the input of login form
