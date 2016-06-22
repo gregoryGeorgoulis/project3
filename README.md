@@ -13,7 +13,10 @@
 - Mongo
 - Mongoose
 - BootStrap
-- ajax
+- ajax/JQuery
+- HTML
+- CSS
+- Passport
 
 ##Features
 - sign up and log in 
