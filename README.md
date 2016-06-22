@@ -13,6 +13,7 @@
 - Mongo
 - Mongoose
 - BootStrap
+- ajax
 
 ##Features
 - sign up and log in 
